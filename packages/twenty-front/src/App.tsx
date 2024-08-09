@@ -81,6 +81,7 @@ import { SettingsWorkspace } from '~/pages/settings/SettingsWorkspace';
 import { SettingsWorkspaceMembers } from '~/pages/settings/SettingsWorkspaceMembers';
 import { Tasks } from '~/pages/tasks/Tasks';
 import { getPageTitleFromPath } from '~/utils/title-utils';
+import { SettingsRoles } from '~/pages/settings/roles/SettingsRoles';
 
 const ProvidersThatNeedRouterContext = () => {
   const { pathname } = useLocation();
@@ -193,6 +194,10 @@ const createRouter = (isBillingEnabled?: boolean) =>
                 <Route
                   path={SettingsPath.WorkspaceMembersPage}
                   element={<SettingsWorkspaceMembers />}
+                />
+                <Route
+                  path={SettingsPath.MembersRoles}
+                  element={<SettingsRoles />}
                 />
                 <Route
                   path={SettingsPath.Workspace}

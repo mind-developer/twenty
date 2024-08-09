@@ -14,6 +14,8 @@ import {
   IconUserCircle,
   IconUsers,
 } from 'twenty-ui';
+// eslint-disable-next-line no-restricted-imports
+import { IconIdBadge2 } from '@tabler/icons-react';
 
 import { useAuth } from '@/auth/hooks/useAuth';
 import { billingState } from '@/client-config/states/billingState';
@@ -78,6 +80,11 @@ export const SettingsNavigationDrawerItems = () => {
           label="Members"
           path={SettingsPath.WorkspaceMembersPage}
           Icon={IconUsers}
+        />
+        <SettingsNavigationDrawerItem
+          label="Roles"
+          path={SettingsPath.MembersRoles}
+          Icon={IconIdBadge2}
         />
         {billing?.isBillingEnabled && (
           <SettingsNavigationDrawerItem
