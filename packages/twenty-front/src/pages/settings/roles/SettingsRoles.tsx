@@ -5,6 +5,7 @@ import { SettingsHeaderContainer } from '@/settings/components/SettingsHeaderCon
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
 import { SettingsRoleCoverImage } from '@/settings/roles/SettingsRoleCoverImage';
 import { SettingsRoleFieldActionDropdown } from '@/settings/roles/role-details/SettingsRoleFieldActionDropdown';
+import { SettingsRoleFieldDisabledActionDropdown } from '@/settings/roles/role-details/SettingsRoleFieldDisabledActionDropdown';
 import {
   SettingsRoleItemTableRow,
   StyledRoleTableRow,
@@ -19,37 +20,12 @@ import { TableHeader } from '@/ui/layout/table/components/TableHeader';
 import { TableSection } from '@/ui/layout/table/components/TableSection';
 import { UndecoratedLink } from '@/ui/navigation/link/components/UndecoratedLink';
 
+// Mock Test
+import { mockRoleItems } from './mockRoles';
+
 const StyledH1Title = styled(H1Title)`
   margin-bottom: 0;
 `;
-
-// Mock Test
-const mockRoleItems = [
-  {
-    namePlural: 'Manager',
-    labelPlural: 'Admin',
-    isCustom: false,
-    isRemote: false,
-  },
-  {
-    namePlural: 'Support',
-    labelPlural: 'Support',
-    isCustom: false,
-    isRemote: false,
-  },
-  {
-    namePlural: 'Sales',
-    labelPlural: 'Sales',
-    isCustom: false,
-    isRemote: false,
-  },
-  {
-    namePlural: 'Finance',
-    labelPlural: 'Finance',
-    isCustom: true,
-    isRemote: false,
-  },
-];
 
 export const SettingsRoles = () => {
   return (
@@ -78,20 +54,39 @@ export const SettingsRoles = () => {
                 <TableHeader></TableHeader>
                 <TableHeader></TableHeader>
               </StyledRoleTableRow>
-              <TableSection title="Active">
-                {mockRoleItems.map((roleItem) => (
-                  <SettingsRoleItemTableRow
-                    roleItem={roleItem}
-                    actions={
-                      <SettingsRoleFieldActionDropdown
-                        isCustomField={roleItem.isCustom}
-                        scopeKey={roleItem.namePlural}
-                        onEdit={() => console.log('Edit')}
-                      />
-                    }
-                  />
-                ))}
-              </TableSection>
+              {!!mockRoleItems.active.length && (
+                <TableSection title="Active">
+                  {mockRoleItems.active.map((roleItem) => (
+                    <SettingsRoleItemTableRow
+                      roleItem={roleItem}
+                      actions={
+                        <SettingsRoleFieldActionDropdown
+                          isCustomField={roleItem.isCustom}
+                          scopeKey={roleItem.namePlural}
+                          onEdit={() => console.log('Edit')}
+                          onDeactivate={() => console.log('Inactive')}
+                        />
+                      }
+                    />
+                  ))}
+                </TableSection>
+              )}
+              {!!mockRoleItems.deactive.length && (
+                <TableSection title="Inactive">
+                  {mockRoleItems.deactive.map((roleItem) => (
+                    <SettingsRoleItemTableRow
+                      roleItem={roleItem}
+                      actions={
+                        <SettingsRoleFieldDisabledActionDropdown
+                          onActivate={() => console.log('Activated')}
+                          onDelete={() => console.log('Delete')}
+                          scopeKey={roleItem.namePlural}
+                        />
+                      }
+                    />
+                  ))}
+                </TableSection>
+              )}
             </Table>
           </Section>
         </div>

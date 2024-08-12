@@ -2,7 +2,6 @@ import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
 import { TableRow } from '@/ui/layout/table/components/TableRow';
 import { TableCell } from '@/ui/layout/table/components/TableCell';
-// eslint-disable-next-line no-restricted-imports
 import { IconId } from '@tabler/icons-react';
 import { SettingsRoleTypeTag } from '@/settings/roles/SettingsRoleTypeFlag';
 import { getRoleTypeLabel } from '@/settings/roles/utils/getRoleTypeLabel';
