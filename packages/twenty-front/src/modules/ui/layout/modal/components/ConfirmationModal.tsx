@@ -12,6 +12,7 @@ import {
   SectionAlignment,
   SectionFontColor,
 } from '@/ui/layout/section/components/Section';
+import { useTranslation } from 'react-i18next';
 
 export type ConfirmationModalProps = {
   isOpen: boolean;
@@ -82,6 +83,8 @@ export const ConfirmationModal = ({
     250,
   );
 
+  const { t } = useTranslation();
+
   return (
     <AnimatePresence mode="wait">
       <LayoutGroup>
@@ -117,7 +120,7 @@ export const ConfirmationModal = ({
           <StyledCenteredButton
             onClick={() => setIsOpen(false)}
             variant="secondary"
-            title="Cancel"
+            title={t('cancelButton')}
             fullWidth
           />
           <StyledCenteredButton

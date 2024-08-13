@@ -10,6 +10,7 @@ import { useFindManyRecords } from '@/object-record/hooks/useFindManyRecords';
 import { SettingsAccountsBlocklistInput } from '@/settings/accounts/components/SettingsAccountsBlocklistInput';
 import { SettingsAccountsBlocklistTable } from '@/settings/accounts/components/SettingsAccountsBlocklistTable';
 import { Section } from '@/ui/layout/section/components/Section';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsAccountsBlocklistSection = () => {
   const currentWorkspaceMember = useRecoilValue(currentWorkspaceMemberState);
@@ -38,11 +39,13 @@ export const SettingsAccountsBlocklistSection = () => {
     });
   };
 
+  const { t } = useTranslation();
+  
   return (
     <Section>
       <H2Title
-        title="Blocklist"
-        description="Exclude the following people and domains from my email sync"
+        title={t('blocklist')}
+        description={t('blocklistDescription')}
       />
       <SettingsAccountsBlocklistInput
         blockedEmailOrDomainList={blocklist.map((item) => item.handle)}

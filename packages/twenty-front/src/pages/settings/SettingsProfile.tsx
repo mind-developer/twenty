@@ -10,34 +10,37 @@ import { NameFields } from '@/settings/profile/components/NameFields';
 import { ProfilePictureUploader } from '@/settings/profile/components/ProfilePictureUploader';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
+import { useTranslation } from 'react-i18next';
 
 const StyledH1Title = styled(H1Title)`
   margin-bottom: 0;
 `;
 
-export const SettingsProfile = () => (
+export const SettingsProfile = () => {
+  const { t } = useTranslation();
+  return(
   <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
     <SettingsPageContainer>
-      <StyledH1Title title="Profile" />
+      <StyledH1Title title={t('profile')} />
       <Section>
-        <H2Title title="Picture" />
+        <H2Title title={t('picture')} />
         <ProfilePictureUploader />
       </Section>
       <Section>
-        <H2Title title="Name" description="Your name as it will be displayed" />
+        <H2Title title={t('name')} description={t('nameProfileDescription')} />
         <NameFields />
       </Section>
       <Section>
         <H2Title
-          title="Email"
-          description="The email associated to your account"
+          title={t('email')}
+          description={t('emailProfileDescription')}
         />
         <EmailField />
       </Section>
       <Section>
         <H2Title
-          title="Language"
-          description="Change the language used in the user interface"
+          title={t('language')}
+          description={t('languageDescription')}
         />
         <ChangeLanguage />
       </Section>
@@ -49,4 +52,4 @@ export const SettingsProfile = () => (
       </Section>
     </SettingsPageContainer>
   </SubMenuTopBarContainer>
-);
+)};

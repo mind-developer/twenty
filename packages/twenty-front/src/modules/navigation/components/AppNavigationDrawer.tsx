@@ -17,6 +17,7 @@ import { useIsSettingsPage } from '../hooks/useIsSettingsPage';
 import { currentMobileNavigationDrawerState } from '../states/currentMobileNavigationDrawerState';
 
 import { MainNavigationDrawerItems } from './MainNavigationDrawerItems';
+import { useTranslation } from 'react-i18next';
 
 export type AppNavigationDrawerProps = {
   className?: string;
@@ -39,10 +40,11 @@ export const AppNavigationDrawer = ({
     ? currentMobileNavigationDrawer === 'settings'
     : isSettingsPage;
 
+  const { t } = useTranslation();
   const drawerProps: NavigationDrawerProps = isSettingsDrawer
     ? {
         isSubMenu: true,
-        title: 'Settings',
+        title: t('settings'),
         children: <SettingsNavigationDrawerItems />,
         footer: <GithubVersionLink />,
       }

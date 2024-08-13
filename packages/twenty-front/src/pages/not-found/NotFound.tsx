@@ -12,6 +12,7 @@ import {
 } from '@/ui/layout/animated-placeholder/components/ErrorPlaceholderStyled';
 import { UndecoratedLink } from '@/ui/navigation/link/components/UndecoratedLink';
 import { PageTitle } from '@/ui/utilities/page-title/PageTitle';
+import { useTranslation } from 'react-i18next';
 
 const StyledBackDrop = styled.div`
   align-items: center;
@@ -33,6 +34,7 @@ const StyledButtonContainer = styled.div`
 `;
 
 export const NotFound = () => {
+  const { t } = useTranslation();
   return (
     <>
       <PageTitle title="Page Not Found | Twenty" />
@@ -41,11 +43,10 @@ export const NotFound = () => {
           <AnimatedPlaceholder type="error404" />
           <AnimatedPlaceholderEmptyTextContainer>
             <AnimatedPlaceholderErrorTitle>
-              Off the beaten path
+              {t('offBeatenPath')}
             </AnimatedPlaceholderErrorTitle>
             <AnimatedPlaceholderErrorSubTitle>
-              The page you're seeking is either gone or never was. Let's get you
-              back on track
+              {t('pageNotFound')}
             </AnimatedPlaceholderErrorSubTitle>
           </AnimatedPlaceholderEmptyTextContainer>
           <StyledButtonContainer>

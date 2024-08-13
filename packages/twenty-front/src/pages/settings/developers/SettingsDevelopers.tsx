@@ -10,6 +10,7 @@ import { Button } from '@/ui/input/button/components/Button';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
 const StyledButtonContainer = styled.div`
   display: flex;
@@ -18,23 +19,24 @@ const StyledButtonContainer = styled.div`
 `;
 
 export const SettingsDevelopers = () => {
+  const { t } = useTranslation();
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
         <SettingsHeaderContainer>
-          <Breadcrumb links={[{ children: 'Developers' }]} />
+          <Breadcrumb links={[{ children: t('developers') }]} />
           <SettingsReadDocumentationButton />
         </SettingsHeaderContainer>
         <Section>
           <H2Title
-            title="API keys"
-            description="Active APIs keys created by you or your team."
+            title={t('apiKeys')}
+            description={t('apiKeysDescription')}
           />
           <SettingsApiKeysTable />
           <StyledButtonContainer>
             <Button
               Icon={IconPlus}
-              title="Create API key"
+              title={t('createApiKey')}
               size="small"
               variant="secondary"
               to={'/settings/developers/api-keys/new'}
@@ -43,14 +45,14 @@ export const SettingsDevelopers = () => {
         </Section>
         <Section>
           <H2Title
-            title="Webhooks"
-            description="Establish Webhook endpoints for notifications on asynchronous events."
+            title={t('webhook')}
+            description={t('webhookDescription')}
           />
           <SettingsWebhooksTable />
           <StyledButtonContainer>
             <Button
               Icon={IconPlus}
-              title="Create Webhook"
+              title={t('createWebhook')}
               size="small"
               variant="secondary"
               to={'/settings/developers/webhooks/new'}

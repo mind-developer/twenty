@@ -13,6 +13,7 @@ import {
 import { SettingsDataModelObjectSummary } from '@/settings/data-model/objects/SettingsDataModelObjectSummary';
 import { Card } from '@/ui/layout/card/components/Card';
 import { CardContent } from '@/ui/layout/card/components/CardContent';
+import { useTranslation } from 'react-i18next';
 
 type SettingsDataModelObjectSettingsFormCardProps = {
   objectMetadataItem: ObjectMetadataItem;
@@ -55,10 +56,11 @@ export const SettingsDataModelObjectSettingsFormCard = ({
     [labelIdentifierFieldMetadataIdFormValue, objectMetadataItem],
   );
 
+  const { t } = useTranslation();
   return (
     <Card fullWidth>
       <StyledTopCardContent divider>
-        <SettingsDataModelCardTitle>Preview</SettingsDataModelCardTitle>
+        <SettingsDataModelCardTitle>{t('preview')}</SettingsDataModelCardTitle>
         {labelIdentifierFieldMetadataItem ? (
           <StyledFieldPreviewCard
             objectMetadataItem={objectMetadataItem}

@@ -36,7 +36,7 @@ export const relationFieldDefinition = formatFieldMetadataItemAsFieldDefinition(
 
 export const selectFieldDefinition: FieldDefinition<FieldSelectMetadata> = {
   fieldMetadataId,
-  label: 'Account Owner',
+  label: 'Account Ownerrrrr',
   iconName: 'iconName',
   type: FieldMetadataType.Select,
   defaultValue: null,

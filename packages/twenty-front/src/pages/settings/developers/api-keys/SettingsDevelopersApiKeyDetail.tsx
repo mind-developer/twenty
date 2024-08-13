@@ -26,6 +26,7 @@ import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
 import { useGenerateApiKeyTokenMutation } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
 
 const StyledInfo = styled.span`
   color: ${({ theme }) => theme.font.color.light};
@@ -61,7 +62,7 @@ export const SettingsDevelopersApiKeyDetail = () => {
     objectNameSingular: CoreObjectNameSingular.ApiKey,
   });
 
-  const { record: apiKeyData } = useFindOneRecord({
+  const { record:   apiKeyData } = useFindOneRecord({
     objectNameSingular: CoreObjectNameSingular.ApiKey,
     objectRecordId: apiKeyId,
   });
@@ -125,6 +126,8 @@ export const SettingsDevelopersApiKeyDetail = () => {
     }
   });
 
+  const { t } = useTranslation();
+
   return (
     <>
       {apiKeyData?.name && (
@@ -133,8 +136,8 @@ export const SettingsDevelopersApiKeyDetail = () => {
             <SettingsHeaderContainer>
               <Breadcrumb
                 links={[
-                  { children: 'Developers', href: '/settings/developers' },
-                  { children: `${apiKeyData.name} API Key` },
+                  { children: t('developers'), href: '/settings/developers' },
+                  { children: `${apiKeyData.name}` },
                 ]}
               />
             </SettingsHeaderContainer>
@@ -142,8 +145,8 @@ export const SettingsDevelopersApiKeyDetail = () => {
               {generatedApiKey ? (
                 <>
                   <H2Title
-                    title="Api Key"
-                    description="Copy this key as it will only be visible this one time"
+                    title={t('apiKey')}
+                    description={t('apiKeyDescription')}
                   />
                   <ApiKeyInput apiKey={generatedApiKey} />
                   <StyledInfo>
@@ -153,12 +156,12 @@ export const SettingsDevelopersApiKeyDetail = () => {
               ) : (
                 <>
                   <H2Title
-                    title="Api Key"
-                    description="Regenerate an Api key"
+                    title={t('apiKey')}
+                    description={t('regenateApiKey')}
                   />
                   <StyledInputContainer>
                     <Button
-                      title="Regenerate Key"
+                      title={t('regenerateKey')}
                       Icon={IconRepeat}
                       onClick={() => setIsRegenerateKeyModalOpen(true)}
                     />
@@ -174,9 +177,9 @@ export const SettingsDevelopersApiKeyDetail = () => {
               )}
             </Section>
             <Section>
-              <H2Title title="Name" description="Name of your API key" />
+              <H2Title title={t('name')} description={t('apiKeyNameDescription')} />
               <TextInput
-                placeholder="E.g. backoffice integration"
+                placeholder={t('egBackoffice')}
                 value={apiKeyData.name}
                 disabled
                 fullWidth
@@ -184,13 +187,13 @@ export const SettingsDevelopersApiKeyDetail = () => {
             </Section>
             <Section>
               <H2Title
-                title="Danger zone"
-                description="Delete this integration"
+                title={t('dangerZone')}
+                description={t('deleteIntegration')}
               />
               <Button
                 accent="danger"
                 variant="secondary"
-                title="Delete"
+                title={t('removeButton')}
                 Icon={IconTrash}
                 onClick={() => setIsDeleteApiKeyModalOpen(true)}
               />
@@ -203,31 +206,28 @@ export const SettingsDevelopersApiKeyDetail = () => {
         confirmationValue="yes"
         isOpen={isDeleteApiKeyModalOpen}
         setIsOpen={setIsDeleteApiKeyModalOpen}
-        title="Delete Api key"
+        title={t('deleteApiKey')}
         subtitle={
           <>
-            Please type "yes" to confirm you want to delete this API Key. Be
-            aware that any script using this key will stop working.
+            {t('deleteApiKeyWarning')}
           </>
         }
         onConfirmClick={deleteIntegration}
-        deleteButtonText="Delete"
+        deleteButtonText={t('removeButton')}
       />
       <ConfirmationModal
         confirmationPlaceholder="yes"
         confirmationValue="yes"
         isOpen={isRegenerateKeyModalOpen}
         setIsOpen={setIsRegenerateKeyModalOpen}
-        title="Regenerate an Api key"
+        title={t('regenerateApiKey')}
         subtitle={
           <>
-            If you’ve lost this key, you can regenerate it, but be aware that
-            any script using this key will need to be updated. Please type "yes"
-            to confirm.
+            {t('lostKeyWarning')}
           </>
         }
         onConfirmClick={regenerateApiKey}
-        deleteButtonText="Regenerate key"
+        deleteButtonText={t('regenerateKey')}
       />
     </>
   );

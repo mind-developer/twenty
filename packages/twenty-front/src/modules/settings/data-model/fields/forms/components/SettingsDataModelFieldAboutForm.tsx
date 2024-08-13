@@ -8,6 +8,7 @@ import { getErrorMessageFromError } from '@/settings/data-model/fields/forms/uti
 import { IconPicker } from '@/ui/input/components/IconPicker';
 import { TextArea } from '@/ui/input/components/TextArea';
 import { TextInput } from '@/ui/input/components/TextInput';
+import { useTranslation } from 'react-i18next';
 
 export const settingsDataModelFieldAboutFormSchema = (
   existingLabels?: string[],
@@ -49,6 +50,7 @@ export const SettingsDataModelFieldAboutForm = ({
     trigger,
     formState: { errors },
   } = useFormContext<SettingsDataModelFieldAboutFormValues>();
+  const { t } = useTranslation();
   return (
     <>
       <StyledInputsContainer>
@@ -71,7 +73,7 @@ export const SettingsDataModelFieldAboutForm = ({
           defaultValue={fieldMetadataItem?.label}
           render={({ field: { onChange, value } }) => (
             <TextInput
-              placeholder="Employees"
+              placeholder={t('employees')}
               value={value}
               onChange={(e) => {
                 onChange(e);
@@ -91,7 +93,7 @@ export const SettingsDataModelFieldAboutForm = ({
         defaultValue={fieldMetadataItem?.description}
         render={({ field: { onChange, value } }) => (
           <TextArea
-            placeholder="Write a description"
+            placeholder={t('writeDescription')}
             minRows={4}
             value={value ?? undefined}
             onChange={onChange}

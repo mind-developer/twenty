@@ -8,6 +8,8 @@ import { z } from 'zod';
 import { Button } from '@/ui/input/button/components/Button';
 import { TextInput } from '@/ui/input/components/TextInput';
 import { isDomain } from '~/utils/is-domain';
+import { useTranslation } from 'react-i18next';
+import i18n from '~/utils/i18n/index';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -30,18 +32,18 @@ const validationSchema = (blockedEmailOrDomainList: string[]) =>
       emailOrDomain: z
         .string()
         .trim()
-        .email('Invalid email or domain')
+        .email(i18n.t('invalidEmailOrDomain'))
         .or(
           z
             .string()
             .refine(
               (value) => value.startsWith('@') && isDomain(value.slice(1)),
-              'Invalid email or domain',
+              i18n.t('invalidEmailOrDomain'),
             ),
         )
         .refine(
           (value) => !blockedEmailOrDomainList.includes(value),
-          'Email or domain is already in blocklist',
+          i18n.t('emailInBlocklist'),
         ),
     })
     .required();
@@ -80,6 +82,8 @@ export const SettingsAccountsBlocklistInput = ({
     }
   }, [isSubmitSuccessful, reset]);
 
+  const { t } = useTranslation();
+
   return (
     <form onSubmit={submit}>
       <StyledContainer>
@@ -99,7 +103,7 @@ export const SettingsAccountsBlocklistInput = ({
             )}
           />
         </StyledLinkContainer>
-        <Button title="Add to blocklist" type="submit" />
+        <Button title={t('blocklistAddButton')} type="submit" />
       </StyledContainer>
     </form>
   );

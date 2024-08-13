@@ -1,4 +1,5 @@
 import { SettingsIntegrationCategory } from '@/settings/integrations/types/SettingsIntegrationCategory';
+import i18n from '~/utils/i18n/index'
 
 export const getSettingsIntegrationAll = ({
   isAirtableIntegrationEnabled,
@@ -16,7 +17,7 @@ export const getSettingsIntegrationAll = ({
   isStripeIntegrationActive: boolean;
 }): SettingsIntegrationCategory => ({
   key: 'all',
-  title: 'All',
+  title: i18n.t('all'),
   integrations: [
     {
       from: {

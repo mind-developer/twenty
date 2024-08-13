@@ -14,6 +14,7 @@ import { SettingsPath } from '@/types/SettingsPath';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsIntegrationDatabase = () => {
   const { databaseKey = '' } = useParams();
@@ -41,13 +42,14 @@ export const SettingsIntegrationDatabase = () => {
 
   if (!isIntegrationAvailable) return null;
 
+  const { t } = useTranslation();
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
         <Breadcrumb
           links={[
             {
-              children: 'Integrations',
+              children: t('integrations'),
               href: getSettingsPagePath(SettingsPath.Integrations),
             },
             { children: integration.text },
@@ -58,8 +60,10 @@ export const SettingsIntegrationDatabase = () => {
         />
         <Section>
           <H2Title
-            title={`${integration.text} database`}
-            description={`Connect or access your ${integration.text} data`}
+            title={`${integration.text}`}
+            description={t('integrationConnect', {
+              integration: integration.text,
+            })}
           />
           <SettingsIntegrationDatabaseConnectionsListCard
             integration={integration}

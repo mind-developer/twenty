@@ -9,6 +9,7 @@ import { useUpdateWorkspaceMutation } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
 import { isUndefinedOrNull } from '~/utils/isUndefinedOrNull';
 import { logError } from '~/utils/logError';
+import { useTranslation } from 'react-i18next';
 
 const StyledComboInputContainer = styled.div`
   display: flex;
@@ -81,10 +82,12 @@ export const NameField = ({
     return debouncedUpdate.cancel;
   }, [debouncedUpdate, displayName]);
 
+  const { t } = useTranslation();
+
   return (
     <StyledComboInputContainer>
       <TextInput
-        label="Name"
+        label={t('name')}
         value={displayName}
         onChange={setDisplayName}
         placeholder="Apple"

@@ -10,6 +10,7 @@ import { Table } from '@/ui/layout/table/components/Table';
 import { TableBody } from '@/ui/layout/table/components/TableBody';
 import { TableHeader } from '@/ui/layout/table/components/TableHeader';
 import { TableRow } from '@/ui/layout/table/components/TableRow';
+import { useTranslation } from 'react-i18next';
 
 const StyledTableBody = styled(TableBody)`
   border-bottom: 1px solid ${({ theme }) => theme.border.color.light};
@@ -25,11 +26,13 @@ export const SettingsApiKeysTable = () => {
     filter: { revokedAt: { is: 'NULL' } },
   });
 
+  const { t } = useTranslation();
+
   return (
     <Table>
       <StyledTableRow>
-        <TableHeader>Name</TableHeader>
-        <TableHeader>Expiration</TableHeader>
+        <TableHeader>{t('name')}</TableHeader>
+        <TableHeader>{t('expiration')}</TableHeader>
         <TableHeader></TableHeader>
       </StyledTableRow>
       {!!apiKeys.length && (

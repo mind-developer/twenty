@@ -8,6 +8,7 @@ import { useBooleanSettingsFormInitialValues } from '@/settings/data-model/field
 import { Select } from '@/ui/input/components/Select';
 import { CardContent } from '@/ui/layout/card/components/CardContent';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
 
 export const settingsDataModelFieldBooleanFormSchema = z.object({
   defaultValue: z.boolean(),
@@ -45,9 +46,10 @@ export const SettingsDataModelFieldBooleanForm = ({
     fieldMetadataItem,
   });
 
+  const { t } = useTranslation();
   return (
     <StyledContainer>
-      <StyledLabel>Default Value</StyledLabel>
+      <StyledLabel>{t('defaultValue')}</StyledLabel>
       <Controller
         name="defaultValue"
         control={control}

@@ -21,6 +21,7 @@ import { useSnackBar } from '@/ui/feedback/snack-bar-manager/hooks/useSnackBar';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
 const newObjectFormSchema = settingsDataModelObjectAboutFormSchema;
 
@@ -67,6 +68,7 @@ export const SettingsNewObject = () => {
     }
   };
 
+  const { t } = useTranslation();
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <FormProvider {...formConfig}>
@@ -76,10 +78,10 @@ export const SettingsNewObject = () => {
             <Breadcrumb
               links={[
                 {
-                  children: 'Objects',
+                  children: t('objects'),
                   href: settingsObjectsPagePath,
                 },
-                { children: 'New' },
+                { children: t('new') },
               ]}
             />
             <SaveAndCancelButtons
@@ -91,8 +93,8 @@ export const SettingsNewObject = () => {
           </SettingsHeaderContainer>
           <Section>
             <H2Title
-              title="About"
-              description="Name in both singular (e.g., 'Invoice') and plural (e.g., 'Invoices') forms."
+              title={t('about')}
+              description={t('nameSingularPluralDescription')}
             />
             <SettingsDataModelObjectAboutForm />
           </Section>

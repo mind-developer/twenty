@@ -7,6 +7,7 @@ import { MainButton } from '@/ui/input/button/components/MainButton';
 import { UndecoratedLink } from '@/ui/navigation/link/components/UndecoratedLink';
 import { useAuthorizeAppMutation } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
 
 type App = { id: string; name: string; logo: string };
 
@@ -54,6 +55,8 @@ const StyledButtonContainer = styled.div`
   width: 100%;
 `;
 export const Authorize = () => {
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
   const [searchParam] = useSearchParams();
   //TODO: Replace with db call for registered third party apps
@@ -114,7 +117,7 @@ export const Authorize = () => {
           />
           <img src={app?.logo} alt="app-icon" height={40} width={40} />
         </StyledAppsContainer>
-        <StyledText>{app?.name} wants to access your account</StyledText>
+        <StyledText>{app?.name} {t('accessAccount')}</StyledText>
         <StyledButtonContainer>
           <UndecoratedLink to={AppPath.Index}>
             <MainButton title="Cancel" variant="secondary" fullWidth />

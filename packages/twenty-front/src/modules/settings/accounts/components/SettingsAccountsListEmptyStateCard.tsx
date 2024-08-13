@@ -6,6 +6,7 @@ import { Button } from '@/ui/input/button/components/Button';
 import { Card } from '@/ui/layout/card/components/Card';
 import { CardContent } from '@/ui/layout/card/components/CardContent';
 import { CardHeader } from '@/ui/layout/card/components/CardHeader';
+import { useTranslation } from 'react-i18next';
 
 const StyledHeader = styled(CardHeader)`
   align-items: center;
@@ -31,13 +32,14 @@ export const SettingsAccountsListEmptyStateCard = ({
     await triggerGoogleApisOAuth();
   };
 
+  const { t } = useTranslation();
   return (
     <Card>
-      <StyledHeader>{label || 'No connected account'}</StyledHeader>
+      <StyledHeader>{label || t('noConnectedAccount')}</StyledHeader>
       <StyledBody>
         <Button
           Icon={IconGoogle}
-          title="Connect with Google"
+          title={t('connectWithGoogle')}
           variant="secondary"
           onClick={handleOnClick}
         />

@@ -8,6 +8,7 @@ import { OBJECT_NAME_MAXIMUM_LENGTH } from '@/settings/data-model/constants/Obje
 import { IconPicker } from '@/ui/input/components/IconPicker';
 import { TextArea } from '@/ui/input/components/TextArea';
 import { TextInput } from '@/ui/input/components/TextInput';
+import { useTranslation } from 'react-i18next';
 
 export const settingsDataModelObjectAboutFormSchema =
   objectMetadataItemSchema.pick({
@@ -53,11 +54,12 @@ export const SettingsDataModelObjectAboutForm = ({
 }: SettingsDataModelObjectAboutFormProps) => {
   const { control } = useFormContext<SettingsDataModelObjectAboutFormValues>();
 
+  const { t } = useTranslation();
   return (
     <>
       <StyledInputsContainer>
         <StyledInputContainer>
-          <StyledLabel>Icon</StyledLabel>
+          <StyledLabel>{t('icon')}</StyledLabel>
           <Controller
             name="icon"
             control={control}
@@ -73,15 +75,15 @@ export const SettingsDataModelObjectAboutForm = ({
         </StyledInputContainer>
         {[
           {
-            label: 'Singular',
+            label: t('singular'),
             fieldName: 'labelSingular' as const,
-            placeholder: 'Listing',
+            placeholder: t('listing'),
             defaultValue: objectMetadataItem?.labelSingular,
           },
           {
-            label: 'Plural',
+            label: t('plural'),
             fieldName: 'labelPlural' as const,
-            placeholder: 'Listings',
+            placeholder: t('listings'),
             defaultValue: objectMetadataItem?.labelPlural,
           },
         ].map(({ defaultValue, fieldName, label, placeholder }) => (
@@ -110,7 +112,7 @@ export const SettingsDataModelObjectAboutForm = ({
         defaultValue={objectMetadataItem?.description ?? null}
         render={({ field: { onChange, value } }) => (
           <TextArea
-            placeholder="Write a description"
+            placeholder={t('writeDescription')}
             minRows={4}
             value={value ?? undefined}
             onChange={(nextValue) => onChange(nextValue ?? null)}

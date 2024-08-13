@@ -18,6 +18,7 @@ import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
 import { useGenerateApiKeyTokenMutation } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsDevelopersApiKeysNew = () => {
   const [generateOneApiKeyToken] = useGenerateApiKeyTokenMutation();
@@ -61,14 +62,16 @@ export const SettingsDevelopersApiKeysNew = () => {
     }
   };
   const canSave = !!formValues.name && createOneApiKey;
+  
+  const { t } = useTranslation();
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
         <SettingsHeaderContainer>
           <Breadcrumb
             links={[
-              { children: 'Developers', href: '/settings/developers' },
-              { children: 'New API Key' },
+              { children: t('developers'), href: '/settings/developers' },
+              { children: t('createApiKey') },
             ]}
           />
           <SaveAndCancelButtons
@@ -80,9 +83,9 @@ export const SettingsDevelopersApiKeysNew = () => {
           />
         </SettingsHeaderContainer>
         <Section>
-          <H2Title title="Name" description="Name of your API key" />
+          <H2Title title={t('name')} description={t('apiKeyNameDescription')} />
           <TextInput
-            placeholder="E.g. backoffice integration"
+            placeholder={t('egBackoffice')}
             value={formValues.name}
             onKeyDown={(e) => {
               if (e.key === 'Enter') {
@@ -100,8 +103,8 @@ export const SettingsDevelopersApiKeysNew = () => {
         </Section>
         <Section>
           <H2Title
-            title="Expiration Date"
-            description="When the API key will expire."
+            title={t('expirationDate')}
+            description={t('expirationDateDescription')}
           />
           <Select
             dropdownId="object-field-type-select"

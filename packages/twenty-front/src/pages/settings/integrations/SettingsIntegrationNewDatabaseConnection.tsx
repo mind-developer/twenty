@@ -26,6 +26,7 @@ import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer'
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
 import { CreateRemoteServerInput } from '~/generated-metadata/graphql';
+import { useTranslation } from 'react-i18next';
 
 const createRemoteServerInputPostgresSchema =
   settingsIntegrationPostgreSQLConnectionFormSchema.transform<CreateRemoteServerInput>(
@@ -131,6 +132,8 @@ export const SettingsIntegrationNewDatabaseConnection = () => {
     }
   };
 
+  const { t } = useTranslation();
+
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
@@ -142,14 +145,14 @@ export const SettingsIntegrationNewDatabaseConnection = () => {
             <Breadcrumb
               links={[
                 {
-                  children: 'Integrations',
+                  children: t('integrations'),
                   href: settingsIntegrationsPagePath,
                 },
                 {
                   children: integration.text,
                   href: `${settingsIntegrationsPagePath}/${databaseKey}`,
                 },
-                { children: 'New' },
+                { children: t('new') },
               ]}
             />
             <SaveAndCancelButtons
@@ -162,8 +165,8 @@ export const SettingsIntegrationNewDatabaseConnection = () => {
           </SettingsHeaderContainer>
           <Section>
             <H2Title
-              title="Connect a new database"
-              description="Provide the information to connect your database"
+              title={t('connectANewDatabase')}
+              description={t('connectANewDatabaseDescription')}
             />
             <SettingsIntegrationDatabaseConnectionForm
               databaseKey={databaseKey}

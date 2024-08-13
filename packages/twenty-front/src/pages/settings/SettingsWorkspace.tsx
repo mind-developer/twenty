@@ -8,28 +8,32 @@ import { ToggleImpersonate } from '@/settings/workspace/components/ToggleImperso
 import { WorkspaceLogoUploader } from '@/settings/workspace/components/WorkspaceLogoUploader';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
+import { useTranslation } from 'react-i18next';
 
 const StyledH1Title = styled(H1Title)`
   margin-bottom: 0;
 `;
 
-export const SettingsWorkspace = () => (
+export const SettingsWorkspace = () => {
+  const { t } = useTranslation();
+
+  return (
   <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
     <SettingsPageContainer>
-      <StyledH1Title title="General" />
+      <StyledH1Title title={t('general')} />
       <Section>
-        <H2Title title="Picture" />
+        <H2Title title={t('picture')} />
         <WorkspaceLogoUploader />
       </Section>
       <Section>
-        <H2Title title="Name" description="Name of your workspace" />
+        <H2Title title={t('name')} description={t('nameDescription')} />
         <NameField />
       </Section>
       <Section>
         <H2Title
-          title="Support"
+          title={t('support')}
           addornment={<ToggleImpersonate />}
-          description="Grant Twenty support temporary access to your workspace so we can troubleshoot problems or recover content on your behalf. You can revoke access at any time."
+          description={t('supportDescription')}
         />
       </Section>
       <Section>
@@ -37,4 +41,5 @@ export const SettingsWorkspace = () => (
       </Section>
     </SettingsPageContainer>
   </SubMenuTopBarContainer>
-);
+  );
+};

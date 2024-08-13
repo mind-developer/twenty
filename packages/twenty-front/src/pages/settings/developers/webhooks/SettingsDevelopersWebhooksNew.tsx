@@ -13,6 +13,7 @@ import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer'
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
 import { isURL } from '~/utils/is-url';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsDevelopersWebhooksNew = () => {
   const navigate = useNavigate();
@@ -43,14 +44,17 @@ export const SettingsDevelopersWebhooksNew = () => {
     navigate(`/settings/developers/webhooks/${newWebhook.id}`);
   };
   const canSave = !!formValues.targetUrl && createOneWebhook;
+
+  const { t } = useTranslation();
+
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
         <SettingsHeaderContainer>
           <Breadcrumb
             links={[
-              { children: 'Developers', href: '/settings/developers' },
-              { children: 'New webhook' },
+              { children: t('developers'), href: '/settings/developers' },
+              { children: t('newWebhook') },
             ]}
           />
           <SaveAndCancelButtons
@@ -63,8 +67,8 @@ export const SettingsDevelopersWebhooksNew = () => {
         </SettingsHeaderContainer>
         <Section>
           <H2Title
-            title="Endpoint URL"
-            description="We will send POST requests to this endpoint for every new event"
+            title={t('endpointUrl')}
+            description={t('endpointDescription')}
           />
           <TextInput
             placeholder="URL"

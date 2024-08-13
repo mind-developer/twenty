@@ -1,6 +1,7 @@
 import { IconDeviceFloppy } from 'twenty-ui';
 
 import { Button } from '@/ui/input/button/components/Button';
+import { useTranslation } from 'react-i18next';
 
 type SaveButtonProps = {
   onSave?: () => void;
@@ -8,9 +9,10 @@ type SaveButtonProps = {
 };
 
 export const SaveButton = ({ onSave, disabled }: SaveButtonProps) => {
+  const { t } = useTranslation(); 
   return (
     <Button
-      title="Save"
+      title={t('saveButton')}
       variant="primary"
       size="small"
       accent="blue"

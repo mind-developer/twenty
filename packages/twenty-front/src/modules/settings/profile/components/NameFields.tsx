@@ -9,6 +9,7 @@ import { CoreObjectNameSingular } from '@/object-metadata/types/CoreObjectNameSi
 import { useUpdateOneRecord } from '@/object-record/hooks/useUpdateOneRecord';
 import { TextInput } from '@/ui/input/components/TextInput';
 import { logError } from '~/utils/logError';
+import { useTranslation } from 'react-i18next';
 
 const StyledComboInputContainer = styled.div`
   display: flex;
@@ -107,17 +108,19 @@ export const NameFields = ({
     currentWorkspaceMember,
   ]);
 
+  const { t } = useTranslation();
+
   return (
     <StyledComboInputContainer>
       <TextInput
-        label="First Name"
+        label={t('firstName')}
         value={firstName}
         onChange={setFirstName}
         placeholder="Tim"
         fullWidth
       />
       <TextInput
-        label="Last Name"
+        label={t('lastName')}
         value={lastName}
         onChange={setLastName}
         placeholder="Cook"

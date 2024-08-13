@@ -13,6 +13,7 @@ import { ConfirmationModal } from '@/ui/layout/modal/components/ConfirmationModa
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsDevelopersWebhooksDetail = () => {
   const [isDeleteWebhookModalOpen, setIsDeleteWebhookModalOpen] =
@@ -30,6 +31,7 @@ export const SettingsDevelopersWebhooksDetail = () => {
     deleteOneWebhook(webhookId);
     navigate('/settings/developers');
   };
+  const { t } = useTranslation();
   return (
     <>
       {webhookData?.targetUrl && (
@@ -38,8 +40,8 @@ export const SettingsDevelopersWebhooksDetail = () => {
             <SettingsHeaderContainer>
               <Breadcrumb
                 links={[
-                  { children: 'Developers', href: '/settings/developers' },
-                  { children: 'Webhook' },
+                  { children: t('developers'), href: '/settings/developers' },
+                  { children: t('webhook') },
                 ]}
               />
             </SettingsHeaderContainer>

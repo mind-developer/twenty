@@ -7,6 +7,7 @@ import { currentUserState } from '@/auth/states/currentUserState';
 import { Button } from '@/ui/input/button/components/Button';
 import { ConfirmationModal } from '@/ui/layout/modal/components/ConfirmationModal';
 import { useDeleteUserAccountMutation } from '~/generated/graphql';
+import { useTranslation } from 'react-i18next';
 
 export const DeleteAccount = () => {
   const [isDeleteAccountModalOpen, setIsDeleteAccountModalOpen] =
@@ -22,18 +23,20 @@ export const DeleteAccount = () => {
     await signOut();
   };
 
+  const { t } = useTranslation();
+
   return (
     <>
       <H2Title
-        title="Danger zone"
-        description="Delete account and all the associated data"
+        title={t('dangerZone')}
+        description={t('dangerZoneProfileDescription')}
       />
 
       <Button
         accent="danger"
         onClick={() => setIsDeleteAccountModalOpen(true)}
         variant="secondary"
-        title="Delete account"
+        title={t('deleteAccountButtonText')}
       />
 
       <ConfirmationModal
@@ -41,15 +44,14 @@ export const DeleteAccount = () => {
         confirmationPlaceholder={userEmail ?? ''}
         isOpen={isDeleteAccountModalOpen}
         setIsOpen={setIsDeleteAccountModalOpen}
-        title="Account Deletion"
+        title={t('deleteAccountTitle')}
         subtitle={
           <>
-            This action cannot be undone. This will permanently delete your
-            entire account. <br /> Please type in your email to confirm.
+            {t('deleteAccountWarning')} <br /> {t('confirmEmail')}
           </>
         }
         onConfirmClick={deleteAccount}
-        deleteButtonText="Delete account"
+        deleteButtonText={t('deleteAccountButtonText')}
       />
     </>
   );

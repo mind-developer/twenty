@@ -22,6 +22,7 @@ import { Table } from '@/ui/layout/table/components/Table';
 import { TableHeader } from '@/ui/layout/table/components/TableHeader';
 import { TableSection } from '@/ui/layout/table/components/TableSection';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
 const StyledSection = styled(Section)`
   display: flex;
@@ -99,18 +100,19 @@ export const SettingsObjectNewFieldStep1 = () => {
     navigate(`/settings/objects/${objectSlug}`);
   };
 
+  const { t } = useTranslation();
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
         <SettingsHeaderContainer>
           <Breadcrumb
             links={[
-              { children: 'Objects', href: '/settings/objects' },
+              { children: t('objects'), href: '/settings/objects' },
               {
                 children: activeObjectMetadataItem.labelPlural,
                 href: `/settings/objects/${objectSlug}`,
               },
-              { children: 'New Field' },
+              { children: t('newField') },
             ]}
           />
           {!activeObjectMetadataItem.isRemote && (
@@ -123,14 +125,14 @@ export const SettingsObjectNewFieldStep1 = () => {
         </SettingsHeaderContainer>
         <StyledSection>
           <H2Title
-            title="Check deactivated fields"
-            description="Before creating a custom field, check if it already exists in the deactivated section."
+            title={t('checkDeactivatedFields')}
+            description={t('checkDeactivatedFieldsDescription')}
           />
           <Table>
             <StyledObjectFieldTableRow>
-              <TableHeader>Name</TableHeader>
-              <TableHeader>Field type</TableHeader>
-              <TableHeader>Data type</TableHeader>
+              <TableHeader>{t('name')}</TableHeader>
+              <TableHeader>{t('fieldType')}</TableHeader>
+              <TableHeader>{t('dataType')}</TableHeader>
               <TableHeader></TableHeader>
             </StyledObjectFieldTableRow>
             {!!activeMetadataFields.length && (
@@ -159,7 +161,7 @@ export const SettingsObjectNewFieldStep1 = () => {
               </TableSection>
             )}
             {!!deactivatedMetadataFields.length && (
-              <TableSection title="Disabled">
+              <TableSection title={t('disabled')}>
                 {deactivatedMetadataFields.map((deactivatedMetadataField) => (
                   <SettingsObjectFieldItemTableRow
                     key={deactivatedMetadataField.name}
@@ -180,7 +182,7 @@ export const SettingsObjectNewFieldStep1 = () => {
           </Table>
           <StyledAddCustomFieldButton
             Icon={IconPlus}
-            title="Add Custom Field"
+            title={t('addCustomField')}
             size="small"
             variant="secondary"
             to={`/settings/objects/${objectSlug}/new-field/step-2`}
