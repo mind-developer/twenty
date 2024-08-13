@@ -80,6 +80,7 @@ export const SettingsRoles = () => {
                         <SettingsRoleFieldDisabledActionDropdown
                           onActivate={() => console.log('Activated')}
                           onDelete={() => console.log('Delete')}
+                          isCustomField={roleItem.isCustom}
                           scopeKey={roleItem.namePlural}
                         />
                       }

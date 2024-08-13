@@ -1,3 +1,12 @@
+export type RoleItem = {
+  namePlural: string;
+  labelPlural: string;
+  isCustom: boolean;
+  isRemote: boolean;
+  description: string;
+  icon: string;
+};
+
 export const mockRoleItems = {
   active: [
     {
