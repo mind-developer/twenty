@@ -1,6 +1,7 @@
 import { SettingsAccountsRadioSettingsCard } from '@/settings/accounts/components/SettingsAccountsRadioSettingsCard';
 import { SettingsAccountsVisibilityIcon } from '@/settings/accounts/components/SettingsAccountsVisibilityIcon';
 import { MessageChannelVisibility } from '~/generated/graphql';
+import i18n from '~/utils/i18n/index';
 
 type SettingsAccountsMessageVisibilityCardProps = {
   onChange: (nextValue: MessageChannelVisibility) => void;
@@ -9,8 +10,8 @@ type SettingsAccountsMessageVisibilityCardProps = {
 
 const inboxSettingsVisibilityOptions = [
   {
-    title: 'Everything',
-    description: 'Subject, body and attachments will be shared with your team.',
+    title: i18n.t('everything'),
+    description: i18n.t('everythingDescription'),
     value: MessageChannelVisibility.ShareEverything,
     cardMedia: (
       <SettingsAccountsVisibilityIcon
@@ -21,8 +22,8 @@ const inboxSettingsVisibilityOptions = [
     ),
   },
   {
-    title: 'Subject and metadata',
-    description: 'Subject and metadata will be shared with your team.',
+    title: i18n.t('subjectAndMetadata'),
+    description: i18n.t('subjectAndMetadataDescription'),
     value: MessageChannelVisibility.Subject,
     cardMedia: (
       <SettingsAccountsVisibilityIcon
@@ -33,8 +34,8 @@ const inboxSettingsVisibilityOptions = [
     ),
   },
   {
-    title: 'Metadata',
-    description: 'Timestamp and participants will be shared with your team.',
+    title: i18n.t('metadata'),
+    description: i18n.t('metadataDescription'),
     value: MessageChannelVisibility.Metadata,
     cardMedia: (
       <SettingsAccountsVisibilityIcon

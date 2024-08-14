@@ -1,10 +1,13 @@
 import { Select } from '@/ui/input/components/Select';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 // TO DO: change how language data is used
 export const ChangeLanguage = () => {
   const { t, i18n } = useTranslation();
+
+  const navigate = useNavigate();
 
   const [selectedLanguage, setSelectedLanguage] = useState<'en' | 'pt'>('en');
 
@@ -20,9 +23,8 @@ export const ChangeLanguage = () => {
     setSelectedLanguage(value);
     i18n.changeLanguage(value);
     localStorage.setItem('language', value);
-    window.location.reload();
+    navigate(0);
   };
-
 
   return (
     <Select
