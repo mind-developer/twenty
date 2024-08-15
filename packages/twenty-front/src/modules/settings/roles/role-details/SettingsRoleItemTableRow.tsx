@@ -1,22 +1,17 @@
 import { useTheme } from '@emotion/react';
 import styled from '@emotion/styled';
-import { TableRow } from '@/ui/layout/table/components/TableRow';
-import { TableCell } from '@/ui/layout/table/components/TableCell';
-import { IconId } from '@tabler/icons-react';
+import { ReactNode } from 'react';
+import { useIcons } from 'twenty-ui';
+
 import { SettingsRoleTypeTag } from '@/settings/roles/SettingsRoleTypeFlag';
 import { getRoleTypeLabel } from '@/settings/roles/utils/getRoleTypeLabel';
-import { ReactNode } from 'react';
-
-type RoleType = {
-  namePlural: string;
-  labelPlural: string;
-  isCustom: boolean;
-  isRemote: boolean;
-};
+import { TableCell } from '@/ui/layout/table/components/TableCell';
+import { TableRow } from '@/ui/layout/table/components/TableRow';
+import { RoleItem } from '~/pages/settings/roles/useMockRoles';
 
 type SettingsRoleItemTableRowProps = {
   actions: ReactNode;
-  roleItem: RoleType;
+  roleItem: RoleItem;
   to?: string;
 };
 
@@ -35,24 +30,27 @@ export const SettingsRoleItemTableRow = ({
   to,
 }: SettingsRoleItemTableRowProps) => {
   const theme = useTheme();
+  const { getIcon } = useIcons();
 
-  // Mock Test
-  const totalCount = 23;
-  const Icon = IconId;
-  const roleTypeLabel = getRoleTypeLabel(roleItem);
+  const Icon = getIcon(roleItem.icon);
+
+  const roleTypeLabel = getRoleTypeLabel({
+    isCustom: roleItem.isCustom,
+    isRemote: roleItem.isRemote,
+  });
 
   return (
-    <StyledRoleTableRow key={roleItem.namePlural}>
+    <StyledRoleTableRow key={roleItem.id}>
       <StyledNameTableCell>
         {!!Icon && (
           <Icon size={theme.icon.size.md} stroke={theme.icon.stroke.sm} />
         )}
-        {roleItem.labelPlural}
+        {roleItem.name}
       </StyledNameTableCell>
       <TableCell>
         <SettingsRoleTypeTag roleTypeLabel={roleTypeLabel} />
       </TableCell>
-      <TableCell align="right">{totalCount}</TableCell>
+      <TableCell align="right">{roleItem.usersId}</TableCell>
       <TableCell></TableCell>
       <TableCell>{actions}</TableCell>
     </StyledRoleTableRow>

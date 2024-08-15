@@ -20,14 +20,15 @@ import { TableHeader } from '@/ui/layout/table/components/TableHeader';
 import { TableSection } from '@/ui/layout/table/components/TableSection';
 import { UndecoratedLink } from '@/ui/navigation/link/components/UndecoratedLink';
 
-// Mock Test
-import { mockRoleItems } from './mockRoles';
+import { useMockRole } from './useMockRoles';
 
 const StyledH1Title = styled(H1Title)`
   margin-bottom: 0;
 `;
 
 export const SettingsRoles = () => {
+  const { roles, toggleArchived, deleteRole } = useMockRole();
+
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
@@ -54,38 +55,50 @@ export const SettingsRoles = () => {
                 <TableHeader></TableHeader>
                 <TableHeader></TableHeader>
               </StyledRoleTableRow>
-              {!!mockRoleItems.active.length && (
-                <TableSection title="Active">
-                  {mockRoleItems.active.map((roleItem) => (
-                    <SettingsRoleItemTableRow
-                      roleItem={roleItem}
-                      actions={
-                        <SettingsRoleFieldActionDropdown
-                          isCustomField={roleItem.isCustom}
-                          scopeKey={roleItem.namePlural}
-                          onEdit={() => console.log('Edit')}
-                          onDeactivate={() => console.log('Inactive')}
-                        />
-                      }
-                    />
-                  ))}
-                </TableSection>
-              )}
-              {!!mockRoleItems.deactive.length && (
-                <TableSection title="Inactive">
-                  {mockRoleItems.deactive.map((roleItem) => (
-                    <SettingsRoleItemTableRow
-                      roleItem={roleItem}
-                      actions={
-                        <SettingsRoleFieldDisabledActionDropdown
-                          isCustomField={roleItem.isCustom}
-                          scopeKey={roleItem.namePlural}
-                          roleId={0}
-                        />
-                      }
-                    />
-                  ))}
-                </TableSection>
+              {roles.length > 0 && (
+                <>
+                  {roles.some((role) => !role.archived) && (
+                    <TableSection title="Active">
+                      {roles
+                        .filter((role) => !role.archived)
+                        .map((roleItem) => (
+                          <SettingsRoleItemTableRow
+                            key={roleItem.id}
+                            roleItem={roleItem}
+                            actions={
+                              <SettingsRoleFieldActionDropdown
+                                isCustomField={roleItem.isCustom}
+                                scopeKey={roleItem.name}
+                                onEdit={() => console.log('Edit')}
+                                onDeactivate={() => toggleArchived(roleItem.id)}
+                              />
+                            }
+                          />
+                        ))}
+                    </TableSection>
+                  )}
+                  {roles.some((role) => role.archived) && (
+                    <TableSection title="Inactive">
+                      {roles
+                        .filter((role) => role.archived)
+                        .map((roleItem) => (
+                          <SettingsRoleItemTableRow
+                            key={roleItem.id}
+                            roleItem={roleItem}
+                            actions={
+                              <SettingsRoleFieldDisabledActionDropdown
+                                isCustomField={roleItem.isCustom}
+                                scopeKey={roleItem.name}
+                                roleId={roleItem.id}
+                                onActivate={() => toggleArchived(roleItem.id)}
+                                onDelete={() => deleteRole(roleItem.id)}
+                              />
+                            }
+                          />
+                        ))}
+                    </TableSection>
+                  )}
+                </>
               )}
             </Table>
           </Section>

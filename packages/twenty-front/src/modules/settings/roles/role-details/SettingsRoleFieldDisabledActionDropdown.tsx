@@ -125,7 +125,7 @@ export const SettingsRoleFieldDisabledActionDropdown = ({
           <StyledButton
             text="Continue"
             accent="danger"
-            onClick={() => console.log(`Delete roleId: ${roleId}`)}
+            onClick={confirmDelete}
             isIconDisplayedOnHoverOnly={false}
           />
         </StyledModalFooter>

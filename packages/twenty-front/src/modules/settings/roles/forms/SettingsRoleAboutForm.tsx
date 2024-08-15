@@ -2,9 +2,13 @@
  Mock data for screen test, db required to continue
 ========================== */
 import styled from '@emotion/styled';
+import { useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
+import { H2Title } from 'twenty-ui';
+import { z } from 'zod';
 
 import { OBJECT_NAME_MAXIMUM_LENGTH } from '@/settings/data-model/constants/ObjectNameMaximumLength';
+import { SettingsRolePermissionsTable } from '@/settings/roles/forms/components/SettingsRolePermissionsTable';
 import { IconPicker } from '@/ui/input/components/IconPicker';
 import { Radio } from '@/ui/input/components/Radio';
 import { RadioGroup } from '@/ui/input/components/RadioGroup';
@@ -12,10 +16,29 @@ import { Select } from '@/ui/input/components/Select';
 import { TextArea } from '@/ui/input/components/TextArea';
 import { TextInput } from '@/ui/input/components/TextInput';
 import { Section } from '@/ui/layout/section/components/Section';
-import { useState } from 'react';
-import { H2Title } from 'twenty-ui';
-import { RoleItem } from '~/pages/settings/roles/mockRoles';
-import { SettingsRolePermissionsTable } from '@/settings/roles/forms/components/SettingsRolePermissionsTable';
+import { RoleItem } from '~/pages/settings/roles/useMockRoles';
+
+const roleMetadataFormSchema = z.object({
+  icon: z.string(),
+  name: z.string().min(3, 'Name is required'),
+  description: z.string().optional(),
+  isCustom: z.boolean().default(true),
+  isRemote: z.boolean().default(false),
+  archived: z.boolean().default(false),
+  usersId: z.number().default(0),
+});
+
+export const SettingsRoleFormSchema = roleMetadataFormSchema.pick({
+  icon: true,
+  name: true,
+  description: true,
+  isCustom: true,
+  isRemote: true,
+  archived: true,
+  usersId: true,
+});
+
+type SettingsRoleFormSchemaValues = z.infer<typeof SettingsRoleFormSchema>;
 
 type SettingsRoleAboutFormProps = {
   disabled?: boolean;
@@ -53,7 +76,8 @@ export const SettingsRoleAboutForm = ({
   disableNameEdit,
   roleItem,
 }: SettingsRoleAboutFormProps) => {
-  const { control } = useFormContext();
+  const { control } = useFormContext<SettingsRoleFormSchemaValues>();
+
   const [selectedReportRole, setSelectedReportRole] = useState('');
   const [assignRecord, setAssignRecord] = useState('');
   const [accessWorkspace, setAccessWorkspace] = useState('');
@@ -88,10 +112,10 @@ export const SettingsRoleAboutForm = ({
             />
           </StyledInputContainer>
           <Controller
-            key={`role-labelSingular-text-input`}
-            name={'labelSingular' as const}
+            key={`role-name-text-input`}
+            name={'name' as const}
             control={control}
-            defaultValue={roleItem?.namePlural}
+            defaultValue={roleItem?.name}
             render={({ field: { onChange, value } }) => (
               <TextInput
                 label={'Name'}
@@ -108,7 +132,7 @@ export const SettingsRoleAboutForm = ({
         <Controller
           name="description"
           control={control}
-          defaultValue={roleItem?.description ?? null}
+          defaultValue={roleItem?.description}
           render={({ field: { onChange, value } }) => (
             <TextArea
               placeholder="Write a description"
