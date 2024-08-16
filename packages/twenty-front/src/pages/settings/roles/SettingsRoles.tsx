@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { useNavigate } from 'react-router-dom';
 import { H1Title, H2Title, IconPlus, IconSettings } from 'twenty-ui';
 
 import { SettingsHeaderContainer } from '@/settings/components/SettingsHeaderContainer';
@@ -28,6 +29,15 @@ const StyledH1Title = styled(H1Title)`
 
 export const SettingsRoles = () => {
   const { roles, toggleArchived, deleteRole } = useMockRole();
+  const navigate = useNavigate();
+
+  const handleEditRole = (roleName: string) => {
+    const path = getSettingsPagePath(SettingsPath.EditRole).replace(
+      ':roleSlug',
+      roleName,
+    );
+    navigate(path);
+  };
 
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
@@ -69,7 +79,7 @@ export const SettingsRoles = () => {
                               <SettingsRoleFieldActionDropdown
                                 isCustomField={roleItem.isCustom}
                                 scopeKey={roleItem.name}
-                                onEdit={() => console.log('Edit')}
+                                onEdit={() => handleEditRole(roleItem.name)}
                                 onDeactivate={() => toggleArchived(roleItem.id)}
                               />
                             }

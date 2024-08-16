@@ -83,6 +83,7 @@ import { Tasks } from '~/pages/tasks/Tasks';
 import { getPageTitleFromPath } from '~/utils/title-utils';
 import { SettingsRoles } from '~/pages/settings/roles/SettingsRoles';
 import { SettingsNewRole } from '~/pages/settings/roles/SettingsNewRole';
+import { SettingsRoleEdit } from '~/pages/settings/roles/SettingsRoleEdit';
 
 const ProvidersThatNeedRouterContext = () => {
   const { pathname } = useLocation();
@@ -203,6 +204,10 @@ const createRouter = (isBillingEnabled?: boolean) =>
                 <Route
                   path={SettingsPath.NewRole}
                   element={<SettingsNewRole />}
+                />
+                <Route
+                  path={SettingsPath.EditRole}
+                  element={<SettingsRoleEdit />}
                 />
                 <Route
                   path={SettingsPath.Workspace}

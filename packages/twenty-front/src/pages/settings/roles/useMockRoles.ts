@@ -103,6 +103,10 @@ export const useMockRole = () => {
     }
   };
 
+  const findRoleByName = (name: string): RoleItem | undefined => {
+    return roles.find((role) => role.name === name);
+  };
+
   useEffect(() => {
     fetchRoles();
   }, []);
@@ -116,5 +120,6 @@ export const useMockRole = () => {
     updateRole,
     deleteRole,
     toggleArchived,
+    findRoleByName,
   };
 };

@@ -1,8 +1,5 @@
-/* ========================== 
- Mock data for screen test, db required to continue
-========================== */
 import styled from '@emotion/styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 import { H2Title } from 'twenty-ui';
 import { z } from 'zod';
@@ -76,7 +73,21 @@ export const SettingsRoleAboutForm = ({
   disableNameEdit,
   roleItem,
 }: SettingsRoleAboutFormProps) => {
-  const { control } = useFormContext<SettingsRoleFormSchemaValues>();
+  const { control, reset } = useFormContext<SettingsRoleFormSchemaValues>();
+
+  useEffect(() => {
+    if (roleItem) {
+      reset({
+        icon: roleItem.icon ?? 'IconListNumbers',
+        name: roleItem.name ?? '',
+        description: roleItem.description ?? '',
+        isCustom: roleItem.isCustom ?? true,
+        isRemote: roleItem.isRemote ?? false,
+        archived: roleItem.archived ?? false,
+        usersId: roleItem.usersId ?? 0,
+      });
+    }
+  }, [roleItem, reset]);
 
   const [selectedReportRole, setSelectedReportRole] = useState('');
   const [assignRecord, setAssignRecord] = useState('');
@@ -101,7 +112,6 @@ export const SettingsRoleAboutForm = ({
             <Controller
               name="icon"
               control={control}
-              defaultValue={roleItem?.icon ?? 'IconListNumbers'}
               render={({ field: { onChange, value } }) => (
                 <IconPicker
                   disabled={disabled}
@@ -112,10 +122,8 @@ export const SettingsRoleAboutForm = ({
             />
           </StyledInputContainer>
           <Controller
-            key={`role-name-text-input`}
-            name={'name' as const}
+            name="name"
             control={control}
-            defaultValue={roleItem?.name}
             render={({ field: { onChange, value } }) => (
               <TextInput
                 label={'Name'}
@@ -132,13 +140,12 @@ export const SettingsRoleAboutForm = ({
         <Controller
           name="description"
           control={control}
-          defaultValue={roleItem?.description}
           render={({ field: { onChange, value } }) => (
             <TextArea
               placeholder="Write a description"
               minRows={1}
-              value={value ?? undefined}
-              onChange={(nextValue) => onChange(nextValue ?? null)}
+              value={value ?? ''}
+              onChange={(nextValue) => onChange(nextValue ?? '')}
               disabled={disabled}
             />
           )}
