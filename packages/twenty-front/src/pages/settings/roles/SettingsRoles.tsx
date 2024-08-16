@@ -5,7 +5,7 @@ import { H1Title, H2Title, IconPlus, IconSettings } from 'twenty-ui';
 import { SettingsHeaderContainer } from '@/settings/components/SettingsHeaderContainer';
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
 import { SettingsRoleCoverImage } from '@/settings/roles/SettingsRoleCoverImage';
-import { SettingsRoleFieldActionDropdown } from '@/settings/roles/role-details/SettingsRoleFieldActionDropdown';
+import { ActionType, SettingsRoleFieldActionDropdown } from '@/settings/roles/role-details/SettingsRoleFieldActionDropdown';
 import { SettingsRoleFieldDisabledActionDropdown } from '@/settings/roles/role-details/SettingsRoleFieldDisabledActionDropdown';
 import {
   SettingsRoleItemTableRow,
@@ -31,11 +31,12 @@ export const SettingsRoles = () => {
   const { roles, toggleArchived, deleteRole } = useMockRole();
   const navigate = useNavigate();
 
-  const handleEditRole = (roleName: string) => {
-    const path = getSettingsPagePath(SettingsPath.EditRole).replace(
-      ':roleSlug',
-      roleName,
-    );
+  // TODO: when integrating with the backend, redo the paths so that they are standardized in lower case (Problems with : { children: `${roleSlug}` })
+  const handleEditRole = (roleName: string, action: ActionType) => {
+    const path = action === 'Edit'
+      ? getSettingsPagePath(SettingsPath.EditRole).replace(':roleSlug', roleName)
+      : getSettingsPagePath(SettingsPath.ViewRole).replace(':roleSlug', roleName);
+      
     navigate(path);
   };
 
@@ -79,7 +80,7 @@ export const SettingsRoles = () => {
                               <SettingsRoleFieldActionDropdown
                                 isCustomField={roleItem.isCustom}
                                 scopeKey={roleItem.name}
-                                onEdit={() => handleEditRole(roleItem.name)}
+                                onEdit={(action) => handleEditRole(roleItem.name, action)}
                                 onDeactivate={() => toggleArchived(roleItem.id)}
                               />
                             }

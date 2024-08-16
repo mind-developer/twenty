@@ -16,10 +16,12 @@ import { MenuItem } from '@/ui/navigation/menu-item/components/MenuItem';
 type SettingsRoleFieldActionDropdownProps = {
   isCustomField?: boolean;
   onDeactivate?: () => void;
-  onEdit: () => void;
+  onEdit: (action: ActionType) => void;
   onSetAsLabelIdentifier?: () => void;
   scopeKey: string;
 };
+
+export type ActionType = 'Edit' | 'View';
 
 export const SettingsRoleFieldActionDropdown = ({
   isCustomField,
@@ -32,8 +34,8 @@ export const SettingsRoleFieldActionDropdown = ({
 
   const { closeDropdown } = useDropdown(dropdownId);
 
-  const handleEdit = () => {
-    onEdit();
+  const handleEdit = (action: ActionType) => {
+    onEdit(action);
     closeDropdown();
   };
 
@@ -63,7 +65,7 @@ export const SettingsRoleFieldActionDropdown = ({
             <MenuItem
               text={isCustomField ? 'Edit' : 'View'}
               LeftIcon={isCustomField ? IconPencil : IconEye}
-              onClick={handleEdit}
+              onClick={() => handleEdit(isCustomField ? 'Edit' : 'View')}
             />
             {!!onSetAsLabelIdentifier && (
               <MenuItem

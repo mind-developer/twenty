@@ -154,6 +154,7 @@ export const SettingsRoleAboutForm = ({
       <Section>
         <H2Title title="New role settings" />
         <Select
+          disabled={disabled}
           dropdownId="report-role"
           label="Reports to"
           options={[
@@ -181,18 +182,21 @@ export const SettingsRoleAboutForm = ({
             label="All members"
             value="allmembers"
             onChange={(e) => setAssignRecord(e.target.value)}
+            disabled={disabled}
           />
           <Radio
             name="assignRecordsGroup"
             label="Members of the same level"
             value="sameLevelMembers"
             onChange={(e) => setAssignRecord(e.target.value)}
+            disabled={disabled}
           />
           <Radio
             name="assignRecordsGroup"
             label="Direct subordinate members"
             value="directSubordinate"
             onChange={(e) => setAssignRecord(e.target.value)}
+            disabled={disabled}
           />
         </RadioGroup>
       </StyledSection>
@@ -207,12 +211,14 @@ export const SettingsRoleAboutForm = ({
             label="Yes"
             value="yes"
             onChange={(e) => setAccessWorkspace(e.target.value)}
+            disabled={disabled}
           />
           <Radio
             name="accessWorkspaceGroup"
             label="No"
             value="no"
             onChange={(e) => setAccessWorkspace(e.target.value)}
+            disabled={disabled}
           />
         </RadioGroup>
       </StyledSection>
@@ -232,11 +238,12 @@ export const SettingsRoleAboutForm = ({
           ]}
           value={copyPermissions}
           onChange={handleSelectCopyPermissions}
+          disabled={disabled}
         />
       </Section>
       <Section>
         <H2Title title="Permissions" />
-        <SettingsRolePermissionsTable />
+        <SettingsRolePermissionsTable disabled={disabled} />
       </Section>
     </>
   );

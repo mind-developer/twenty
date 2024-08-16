@@ -2,6 +2,10 @@ import styled from '@emotion/styled';
 
 import { Checkbox } from '@/ui/input/components/Checkbox';
 
+type SettingsRolePermissionsTableProps = {
+  disabled?: boolean;
+};
+
 // Mock Test
 const mockPermissions = [
   {
@@ -65,7 +69,9 @@ const StyledCheckbox = styled(Checkbox)`
   justify-content: center;
 `;
 
-export const SettingsRolePermissionsTable = () => {
+export const SettingsRolePermissionsTable = ({
+  disabled,
+}: SettingsRolePermissionsTableProps) => {
   // TODO: implement multiple checkbox selects when the backend is ready
   return (
     <StyledTable>
@@ -76,6 +82,7 @@ export const SettingsRolePermissionsTable = () => {
               <Checkbox
                 checked={false}
                 onChange={() => console.log('Action: table')}
+                disabled={disabled}
               />
               Table
             </div>
@@ -86,6 +93,7 @@ export const SettingsRolePermissionsTable = () => {
                 <Checkbox
                   checked={false}
                   onChange={() => console.log(`Action: ${action}`)}
+                  disabled={disabled}
                 />
                 {action.charAt(0).toUpperCase() + action.slice(1)}
               </div>
@@ -100,6 +108,7 @@ export const SettingsRolePermissionsTable = () => {
               <Checkbox
                 checked={Object.values(row.permissions).every(Boolean)}
                 onChange={() => console.log(`Action: ${row.tableName}`)}
+                disabled={disabled}
               />
               {row.tableName}
             </StyledCell>
@@ -108,6 +117,7 @@ export const SettingsRolePermissionsTable = () => {
                 <StyledCheckbox
                   checked={false}
                   onChange={() => console.log(`Action: ${action}`)}
+                  disabled={disabled}
                 />
               </td>
             ))}

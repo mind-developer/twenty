@@ -20,6 +20,7 @@ export enum SettingsPath {
   MembersRoles = 'members-roles',
   NewRole = 'members-roles/new',
   EditRole = 'members-roles/:roleSlug/edit',
+  ViewRole = 'members-roles/:roleSlug/view',
   RoleOverview = 'members-roles/overview',
   Workspace = 'workspace',
   Developers = 'developers',
