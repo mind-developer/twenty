@@ -15,6 +15,20 @@ import { TextInput } from '@/ui/input/components/TextInput';
 import { Section } from '@/ui/layout/section/components/Section';
 import { RoleItem } from '~/pages/settings/roles/useMockRoles';
 
+const permissionsSchema = z
+  .array(
+    z.object({
+      type: z.enum(['create', 'view', 'edit', 'delete']),
+      allowed: z.boolean().default(false),
+    }),
+  )
+  .default([
+    { type: 'create', allowed: false },
+    { type: 'view', allowed: false },
+    { type: 'edit', allowed: false },
+    { type: 'delete', allowed: false },
+  ]);
+
 const roleMetadataFormSchema = z.object({
   icon: z.string(),
   name: z.string().min(3, 'Name is required'),
@@ -23,6 +37,7 @@ const roleMetadataFormSchema = z.object({
   isRemote: z.boolean().default(false),
   archived: z.boolean().default(false),
   usersId: z.number().default(0),
+  permissions: permissionsSchema,
 });
 
 export const SettingsRoleFormSchema = roleMetadataFormSchema.pick({
@@ -33,6 +48,7 @@ export const SettingsRoleFormSchema = roleMetadataFormSchema.pick({
   isRemote: true,
   archived: true,
   usersId: true,
+  permissions: true,
 });
 
 type SettingsRoleFormSchemaValues = z.infer<typeof SettingsRoleFormSchema>;

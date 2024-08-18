@@ -35,7 +35,7 @@ export const SettingsRoleCoverImage = () => {
           Icon={IconEye}
           title="Visualize"
           size="small"
-          to="/settings/members-roles/overview"
+          to="/settings/roles/overview"
         />
       </StyledButtonContainer>
     </StyledCoverImageContainer>

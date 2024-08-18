@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 import { ReactNode } from 'react';
 import { useIcons } from 'twenty-ui';
 
-import { SettingsRoleTypeTag } from '@/settings/roles/SettingsRoleTypeFlag';
+import { SettingsRoleTypeTag } from '@/settings/roles/SettingsRoleTypeTag';
 import { getRoleTypeLabel } from '@/settings/roles/utils/getRoleTypeLabel';
 import { TableCell } from '@/ui/layout/table/components/TableCell';
 import { TableRow } from '@/ui/layout/table/components/TableRow';

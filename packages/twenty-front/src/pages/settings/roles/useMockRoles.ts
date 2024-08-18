@@ -14,7 +14,13 @@ export type RoleItem = {
   // assignRecordsTo: ; // All members, Members of the same level, Direct subordinate members
   // accessWorkspace: ; // Yes, No [True, False]
   // copyPermissions: ; // Role X
-  // permissions: ; // arr - xyz function permissions table (for create, edit, view, delete) / Default: none
+  isSystem?: any;
+  permissions?: Permissions[]; // arr - xyz function permissions table (for create, edit, view, delete)
+};
+
+export type Permissions = {
+  type: 'create' | 'edit' | 'view' | 'delete';
+  allowed: boolean;
 };
 
 const API_URL = 'https://66bd028a24da2de7ff6c7edd.mockapi.io/mock/role';

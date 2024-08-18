@@ -85,6 +85,7 @@ import { SettingsRoles } from '~/pages/settings/roles/SettingsRoles';
 import { SettingsNewRole } from '~/pages/settings/roles/SettingsNewRole';
 import { SettingsRoleEdit } from '~/pages/settings/roles/SettingsRoleEdit';
 import { SettingsRoleView } from '~/pages/settings/roles/SettingsRoleView';
+import { SettingsRolesOverview } from '~/pages/settings/roles/SettingsRolesOverview';
 
 const ProvidersThatNeedRouterContext = () => {
   const { pathname } = useLocation();
@@ -213,6 +214,10 @@ const createRouter = (isBillingEnabled?: boolean) =>
                 <Route
                   path={SettingsPath.ViewRole}
                   element={<SettingsRoleView />}
+                />
+                <Route
+                  path={SettingsPath.RoleOverview}
+                  element={<SettingsRolesOverview />}
                 />
                 <Route
                   path={SettingsPath.Workspace}
