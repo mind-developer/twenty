@@ -1,6 +1,7 @@
 import { MessageChannelContactAutoCreationPolicy } from '@/accounts/types/MessageChannel';
 import { SettingsAccountsMessageAutoCreationIcon } from '@/settings/accounts/components/SettingsAccountsMessageAutoCreationIcon';
 import { SettingsAccountsRadioSettingsCard } from '@/settings/accounts/components/SettingsAccountsRadioSettingsCard';
+import i18n from '~/utils/i18n/index';
 
 type SettingsAccountsMessageAutoCreationCardProps = {
   onChange: (nextValue: MessageChannelContactAutoCreationPolicy) => void;
@@ -9,22 +10,22 @@ type SettingsAccountsMessageAutoCreationCardProps = {
 
 const autoCreationOptions = [
   {
-    title: 'Send and Received',
-    description: 'People I’ve sent emails to and received emails from.',
+    title: i18n.t('sendAndReceived'),
+    description: i18n.t('sendAndReceivedDescription'),
     value: MessageChannelContactAutoCreationPolicy.SENT_AND_RECEIVED,
     cardMedia: (
       <SettingsAccountsMessageAutoCreationIcon isSentActive isReceivedActive />
     ),
   },
   {
-    title: 'Sent',
-    description: 'People I’ve sent emails to.',
+    title: i18n.t('sent'),
+    description: i18n.t('sentDescription'),
     value: MessageChannelContactAutoCreationPolicy.SENT,
     cardMedia: <SettingsAccountsMessageAutoCreationIcon isSentActive />,
   },
   {
-    title: 'None',
-    description: 'Don’t auto-create contacts.',
+    title: i18n.t('none'),
+    description: i18n.t('noneDescription'),
     value: MessageChannelContactAutoCreationPolicy.NONE,
     cardMedia: (
       <SettingsAccountsMessageAutoCreationIcon

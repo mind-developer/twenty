@@ -15,6 +15,7 @@ import '@emotion/react';
 import { App } from './App';
 
 import './index.css';
+import '~/utils/i18n';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const root = ReactDOM.createRoot(

@@ -26,6 +26,7 @@ const StyledFilterRow = styled.div`
   flex-direction: row;
   gap: ${({ theme }) => theme.spacing(2)};
 `;
+import { useTranslation } from 'react-i18next';
 
 export const SettingsDevelopersWebhooksDetail = () => {
   const { objectMetadataItems } = useObjectMetadataItems();
@@ -60,6 +61,7 @@ export const SettingsDevelopersWebhooksDetail = () => {
     deleteOneWebhook(webhookId);
     navigate('/settings/developers');
   };
+  const { t } = useTranslation();
 
   const fieldTypeOptions = [
     { value: '*', label: 'All Objects' },
@@ -93,9 +95,16 @@ export const SettingsDevelopersWebhooksDetail = () => {
             <SettingsHeaderContainer>
               <Breadcrumb
                 links={[
-                  { children: 'Developers', href: '/settings/developers' },
-                  { children: 'Webhook' },
+                  { children: t('developers'), href: '/settings/developers' },
+                  { children: t('webhook') },
                 ]}
+              />
+              <SaveAndCancelButtons
+                isSaveDisabled={!isDirty}
+                onCancel={() => {
+                  navigate('/settings/developers');
+                }}
+                onSave={handleSave}
               />
               <SaveAndCancelButtons
                 isSaveDisabled={!isDirty}

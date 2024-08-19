@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { ColorScheme } from '@/workspace-member/types/WorkspaceMember';
 
 import { ColorSchemeCard } from './ColorSchemeCard';
+import { useTranslation } from 'react-i18next';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -35,7 +36,11 @@ export const ColorSchemePicker = ({
   value,
   onChange,
   className,
-}: ColorSchemePickerProps) => (
+}: ColorSchemePickerProps) => {
+  
+  const { t } = useTranslation();
+
+  return (
   <StyledContainer className={className}>
     <StyledCardContainer>
       <ColorSchemeCard
@@ -43,7 +48,7 @@ export const ColorSchemePicker = ({
         variant="Light"
         selected={value === 'Light'}
       />
-      <StyledLabel>Light</StyledLabel>
+      <StyledLabel>{t('light')}</StyledLabel>
     </StyledCardContainer>
     <StyledCardContainer>
       <ColorSchemeCard
@@ -51,7 +56,7 @@ export const ColorSchemePicker = ({
         variant="Dark"
         selected={value === 'Dark'}
       />
-      <StyledLabel>Dark</StyledLabel>
+      <StyledLabel>{t('dark')}</StyledLabel>
     </StyledCardContainer>
     <StyledCardContainer>
       <ColorSchemeCard
@@ -59,7 +64,7 @@ export const ColorSchemePicker = ({
         variant="System"
         selected={value === 'System'}
       />
-      <StyledLabel>System settings</StyledLabel>
+      <StyledLabel>{t('systemSettings')}</StyledLabel>
     </StyledCardContainer>
   </StyledContainer>
-);
+)};

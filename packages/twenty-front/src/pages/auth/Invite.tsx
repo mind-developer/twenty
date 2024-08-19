@@ -15,6 +15,7 @@ import { useWorkspaceSwitching } from '@/ui/navigation/navigation-drawer/hooks/u
 import { AnimatedEaseIn } from '@/ui/utilities/animation/components/AnimatedEaseIn';
 import { useAddUserToWorkspaceMutation } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
 
 const StyledContentContainer = styled.div`
   margin-bottom: ${({ theme }) => theme.spacing(8)};
@@ -22,6 +23,8 @@ const StyledContentContainer = styled.div`
 `;
 
 export const Invite = () => {
+  const { t } = useTranslation();
+
   const { workspace: workspaceFromInviteHash, workspaceInviteHash } =
     useWorkspaceFromInviteHash();
   const { form } = useSignInUpForm();
@@ -74,21 +77,21 @@ export const Invite = () => {
             />
           </StyledContentContainer>
           <FooterNote>
-            By using Twenty, you agree to the{' '}
+            {t('youAgreeWith')}{' '}
             <a
               href="https://twenty.com/legal/terms"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Terms of Service
+              {t('termsOfService')}
             </a>{' '}
-            and{' '}
+            {t('and')}{' '}
             <a
               href="https://twenty.com/legal/privacy"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Privacy Policy
+              {t('privacyPolicy')}
             </a>
             .
           </FooterNote>

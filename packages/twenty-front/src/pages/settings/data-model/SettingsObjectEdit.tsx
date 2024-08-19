@@ -28,6 +28,7 @@ import { Button } from '@/ui/input/button/components/Button';
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
 const objectEditFormSchema = z
   .object({})
@@ -102,6 +103,8 @@ export const SettingsObjectEdit = () => {
     navigate(settingsObjectsPagePath);
   };
 
+  const { t } = useTranslation();
+
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <FormProvider {...formConfig}>
@@ -111,14 +114,14 @@ export const SettingsObjectEdit = () => {
             <Breadcrumb
               links={[
                 {
-                  children: 'Objects',
+                  children: t('objects'),
                   href: settingsObjectsPagePath,
                 },
                 {
                   children: activeObjectMetadataItem.labelPlural,
                   href: `${settingsObjectsPagePath}/${objectSlug}`,
                 },
-                { children: 'Edit' },
+                { children: t('edit') },
               ]}
             />
             {activeObjectMetadataItem.isCustom && (
@@ -134,8 +137,8 @@ export const SettingsObjectEdit = () => {
           </SettingsHeaderContainer>
           <Section>
             <H2Title
-              title="About"
-              description="Name in both singular (e.g., 'Invoice') and plural (e.g., 'Invoices') forms."
+              title={t('about')}
+              description={t('nameSingularPluralDescription')}
             />
             <SettingsDataModelObjectAboutForm
               disabled={!activeObjectMetadataItem.isCustom}
@@ -145,18 +148,18 @@ export const SettingsObjectEdit = () => {
           </Section>
           <Section>
             <H2Title
-              title="Settings"
-              description="Choose the fields that will identify your records"
+              title={t('settings')}
+              description={t('dataModelSettingsDescription')}
             />
             <SettingsDataModelObjectSettingsFormCard
               objectMetadataItem={activeObjectMetadataItem}
             />
           </Section>
           <Section>
-            <H2Title title="Danger zone" description="Deactivate object" />
+            <H2Title title={t('dangerZone')} description={t('deactivateObject')} />
             <Button
               Icon={IconArchive}
-              title="Deactivate"
+              title={t('deactivate')}
               size="small"
               onClick={handleDisable}
             />

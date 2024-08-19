@@ -29,6 +29,7 @@ import { Table } from '@/ui/layout/table/components/Table';
 import { TableHeader } from '@/ui/layout/table/components/TableHeader';
 import { TableSection } from '@/ui/layout/table/components/TableSection';
 import { UndecoratedLink } from '@/ui/navigation/link/components/UndecoratedLink';
+import { useTranslation } from 'react-i18next';
 
 const StyledIconChevronRight = styled(IconChevronRight)`
   color: ${({ theme }) => theme.font.color.tertiary};
@@ -46,15 +47,16 @@ export const SettingsObjects = () => {
   const { deleteOneObjectMetadataItem } = useDeleteOneObjectMetadataItem();
   const { updateOneObjectMetadataItem } = useUpdateOneObjectMetadataItem();
 
+  const { t } = useTranslation();
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
         <SettingsHeaderContainer>
-          <StyledH1Title title="Objects" />
+          <StyledH1Title title={t('objects')} />
           <UndecoratedLink to={getSettingsPagePath(SettingsPath.NewObject)}>
             <Button
               Icon={IconPlus}
-              title="Add object"
+              title={t('addObject')}
               accent="blue"
               size="small"
             />
@@ -63,17 +65,17 @@ export const SettingsObjects = () => {
         <div>
           <SettingsObjectCoverImage />
           <Section>
-            <H2Title title="Existing objects" />
+            <H2Title title={t('existingObjects')} />
             <Table>
               <StyledObjectTableRow>
-                <TableHeader>Name</TableHeader>
-                <TableHeader>Type</TableHeader>
-                <TableHeader align="right">Fields</TableHeader>
-                <TableHeader align="right">Instances</TableHeader>
+                <TableHeader>{t('name')}</TableHeader>
+                <TableHeader>{t('type')}</TableHeader>
+                <TableHeader align="right">{t('fields')}</TableHeader>
+                <TableHeader align="right">{t('instances')}</TableHeader>
                 <TableHeader></TableHeader>
               </StyledObjectTableRow>
               {!!activeObjectMetadataItems.length && (
-                <TableSection title="Active">
+                <TableSection title={t('active')}>
                   {activeObjectMetadataItems.map((activeObjectMetadataItem) => (
                     <SettingsObjectItemTableRow
                       key={activeObjectMetadataItem.namePlural}
@@ -92,7 +94,7 @@ export const SettingsObjects = () => {
                 </TableSection>
               )}
               {!!inactiveObjectMetadataItems.length && (
-                <TableSection title="Inactive">
+                <TableSection title={t('inactive')}>
                   {inactiveObjectMetadataItems.map(
                     (inactiveObjectMetadataItem) => (
                       <SettingsObjectItemTableRow

@@ -34,6 +34,7 @@ import { ViewType } from '@/views/types/ViewType';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 import { isDefined } from '~/utils/isDefined';
 import { isUndefinedOrNull } from '~/utils/isUndefinedOrNull';
+import { useTranslation } from 'react-i18next';
 
 type SettingsDataModelNewFieldFormValues = z.infer<
   ReturnType<typeof settingsFieldFormSchema>
@@ -168,6 +169,8 @@ export const SettingsObjectNewFieldStep2 = () => {
     ] as const
   ).filter(isDefined);
 
+  const { t } = useTranslation();
+
   return (
     <RecordFieldValueSelectorContextProvider>
       <FormProvider // eslint-disable-next-line react/jsx-props-no-spreading
@@ -178,12 +181,12 @@ export const SettingsObjectNewFieldStep2 = () => {
             <SettingsHeaderContainer>
               <Breadcrumb
                 links={[
-                  { children: 'Objects', href: '/settings/objects' },
+                  { children: t('objects'), href: '/settings/objects' },
                   {
                     children: activeObjectMetadataItem.labelPlural,
                     href: `/settings/objects/${objectSlug}`,
                   },
-                  { children: 'New Field' },
+                  { children: t('newField') },
                 ]}
               />
               {!activeObjectMetadataItem.isRemote && (
@@ -197,8 +200,8 @@ export const SettingsObjectNewFieldStep2 = () => {
             </SettingsHeaderContainer>
             <Section>
               <H2Title
-                title="Name and description"
-                description="The name and description of this field"
+                title={t('nameAndDescription')}
+                description={t('nameAndDescriptionDescription')}
               />
               <SettingsDataModelFieldAboutForm
                 maxLength={FIELD_NAME_MAXIMUM_LENGTH}
@@ -206,8 +209,8 @@ export const SettingsObjectNewFieldStep2 = () => {
             </Section>
             <Section>
               <H2Title
-                title="Type and values"
-                description="The field's type and values."
+                title={t('typeAndValues')}
+                description={t('typeAndValuesDescription')}
               />
               <StyledSettingsObjectFieldTypeSelect
                 excludedFieldTypes={excludedFieldTypes}
@@ -215,7 +218,7 @@ export const SettingsObjectNewFieldStep2 = () => {
               <SettingsDataModelFieldSettingsFormCard
                 fieldMetadataItem={{
                   icon: formConfig.watch('icon'),
-                  label: formConfig.watch('label') || 'Employees',
+                  label: formConfig.watch('label') || t('employees'),
                   type: formConfig.watch('type'),
                 }}
                 objectMetadataItem={activeObjectMetadataItem}

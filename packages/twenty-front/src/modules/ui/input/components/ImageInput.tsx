@@ -6,6 +6,8 @@ import { IconFileUpload, IconTrash, IconUpload, IconX } from 'twenty-ui';
 import { Button } from '@/ui/input/button/components/Button';
 import { getImageAbsoluteURI } from '~/utils/image/getImageAbsoluteURI';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
+
 
 const StyledContainer = styled.div`
   display: flex;
@@ -106,6 +108,8 @@ export const ImageInput = ({
     hiddenFileInput.current?.click();
   };
 
+  const { t } = useTranslation();
+
   const pictureURI = useMemo(() => getImageAbsoluteURI(picture), [picture]);
 
   return (
@@ -150,7 +154,7 @@ export const ImageInput = ({
               Icon={IconUpload}
               onClick={onUploadButtonClick}
               variant="secondary"
-              title="Upload"
+              title={t('uploadButton')}
               disabled={disabled}
               fullWidth
             />
@@ -160,12 +164,12 @@ export const ImageInput = ({
             onClick={onRemove}
             variant="secondary"
             title="Remove"
-            disabled={!pictureURI || disabled}
+            disabled={!picture || disabled}
             fullWidth
           />
         </StyledButtonContainer>
         <StyledText>
-          We support your best PNGs, JPEGs and GIFs portraits under 10MB
+          {t('supportedFilesDescription')}
         </StyledText>
         {errorMessage && <StyledErrorText>{errorMessage}</StyledErrorText>}
       </StyledContent>

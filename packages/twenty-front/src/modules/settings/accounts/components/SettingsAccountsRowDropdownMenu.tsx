@@ -17,6 +17,7 @@ import { DropdownMenu } from '@/ui/layout/dropdown/components/DropdownMenu';
 import { DropdownMenuItemsContainer } from '@/ui/layout/dropdown/components/DropdownMenuItemsContainer';
 import { useDropdown } from '@/ui/layout/dropdown/hooks/useDropdown';
 import { MenuItem } from '@/ui/navigation/menu-item/components/MenuItem';
+import { useTranslation } from 'react-i18next';
 
 type SettingsAccountsRowDropdownMenuProps = {
   account: ConnectedAccount;
@@ -38,6 +39,7 @@ export const SettingsAccountsRowDropdownMenu = ({
 
   const { triggerGoogleApisOAuth } = useTriggerGoogleApisOAuth();
 
+  const { t } = useTranslation();
   return (
     <Dropdown
       dropdownId={dropdownId}
@@ -52,7 +54,7 @@ export const SettingsAccountsRowDropdownMenu = ({
           <DropdownMenuItemsContainer>
             <MenuItem
               LeftIcon={IconMail}
-              text="Emails settings"
+              text={t('emailsSettings')}
               onClick={() => {
                 navigate(`/settings/accounts/emails`);
                 closeDropdown();
@@ -60,7 +62,7 @@ export const SettingsAccountsRowDropdownMenu = ({
             />
             <MenuItem
               LeftIcon={IconCalendarEvent}
-              text="Calendar settings"
+              text={t('calendarSettings')}
               onClick={() => {
                 navigate(`/settings/accounts/calendars`);
                 closeDropdown();
@@ -69,7 +71,7 @@ export const SettingsAccountsRowDropdownMenu = ({
             {account.authFailedAt && (
               <MenuItem
                 LeftIcon={IconRefresh}
-                text="Reconnect"
+                text={t('reconnect')}
                 onClick={() => {
                   triggerGoogleApisOAuth();
                   closeDropdown();
@@ -79,7 +81,7 @@ export const SettingsAccountsRowDropdownMenu = ({
             <MenuItem
               accent="danger"
               LeftIcon={IconTrash}
-              text="Remove account"
+              text={t('deleteAccountButtonText')}
               onClick={() => {
                 deleteOneRecord(account.id);
                 closeDropdown();

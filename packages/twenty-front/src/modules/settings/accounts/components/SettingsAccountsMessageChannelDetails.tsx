@@ -12,6 +12,8 @@ import { SettingsAccountsMessageVisibilityCard } from '@/settings/accounts/compo
 import { SettingsAccountsToggleSettingCard } from '@/settings/accounts/components/SettingsAccountsToggleSettingCard';
 import { Section } from '@/ui/layout/section/components/Section';
 import { MessageChannelVisibility } from '~/generated-metadata/graphql';
+import { useTranslation } from 'react-i18next';
+import i18n from '~/utils/i18n/index';
 
 type SettingsAccountsMessageChannelDetailsProps = {
   messageChannel: Pick<
@@ -76,12 +78,13 @@ export const SettingsAccountsMessageChannelDetails = ({
     });
   };
 
+  const { t } = useTranslation();
   return (
     <StyledDetailsContainer>
       <Section>
         <H2Title
-          title="Visibility"
-          description="Define what will be visible to other users in your workspace"
+          title={t('visibility')}
+          description={t('visibilityDescription')}
         />
         <SettingsAccountsMessageVisibilityCard
           value={messageChannel.visibility}
@@ -90,8 +93,8 @@ export const SettingsAccountsMessageChannelDetails = ({
       </Section>
       <Section>
         <H2Title
-          title="Contact auto-creation"
-          description="Automatically create People records when receiving or sending emails"
+          title={t('contactAutoCreation')}
+          description={t('contactAutoCreationDescription')}
         />
         <SettingsAccountsMessageAutoCreationCard
           value={messageChannel.contactAutoCreationPolicy}
@@ -102,14 +105,14 @@ export const SettingsAccountsMessageChannelDetails = ({
         <SettingsAccountsToggleSettingCard
           parameters={[
             {
-              title: 'Exclude non-professional emails',
-              description: 'Don’t sync emails from/to Gmail, Outlook...',
+              title: i18n.t('excludeNonProfessionalEmails'),
+              description: i18n.t('excludeNonProfessionalEmailsDescription'),
               value: !!messageChannel.excludeNonProfessionalEmails,
               onToggle: handleIsNonProfessionalEmailExcludedToggle,
             },
             {
-              title: 'Exclude group emails',
-              description: 'Don’t sync emails from team@ support@ noreply@...',
+              title: i18n.t('excludeGroupEmails'),
+              description: i18n.t('excludeGroupEmailsDescription'),
               value: !!messageChannel.excludeGroupEmails,
               onToggle: handleIsGroupEmailExcludedToggle,
             },

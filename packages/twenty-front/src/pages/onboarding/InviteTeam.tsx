@@ -32,6 +32,8 @@ import {
   useSendInviteLinkMutation,
 } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
+import i18n from '~/utils/i18n/index';
 
 const StyledAnimatedContainer = styled.div`
   display: flex;
@@ -117,7 +119,7 @@ export const InviteTeam = () => {
     if (isDefined(currentWorkspace?.inviteHash)) {
       const inviteLink = `${window.location.origin}/invite/${currentWorkspace?.inviteHash}`;
       navigator.clipboard.writeText(inviteLink);
-      enqueueSnackBar('Link copied to clipboard', {
+      enqueueSnackBar(i18n.t('linkCopiedToClipboard'), {
         variant: SnackBarVariant.Success,
         icon: <IconCopy size={theme.icon.size.md} />,
         duration: 2000,
@@ -142,7 +144,7 @@ export const InviteTeam = () => {
         throw result.errors;
       }
       if (emails.length > 0) {
-        enqueueSnackBar('Invite link sent to email addresses', {
+        enqueueSnackBar(i18n.t('inviteSentToEmailAddresses'), {
           variant: SnackBarVariant.Success,
           duration: 2000,
         });
@@ -164,11 +166,12 @@ export const InviteTeam = () => {
     return <></>;
   }
 
+  const { t } = useTranslation();
   return (
     <>
-      <Title noMarginTop>Invite your team</Title>
+      <Title noMarginTop>{t('inviteYourTeam')}</Title>
       <SubTitle>
-        Get the most out of your workspace by inviting your team.
+        {t('inviteYourTeamDescription')}
       </SubTitle>
       <StyledAnimatedContainer>
         {fields.map((field, index) => (
@@ -201,7 +204,7 @@ export const InviteTeam = () => {
             <SeparatorLineText>Or</SeparatorLineText>
             <StyledActionLinkContainer>
               <LightButton
-                title="Copy invitation link"
+                title={t('copyInvitationLink')}
                 accent="tertiary"
                 onClick={copyInviteLink}
                 Icon={IconCopy}
@@ -212,7 +215,7 @@ export const InviteTeam = () => {
       </StyledAnimatedContainer>
       <StyledButtonContainer>
         <MainButton
-          title="Finish"
+          title={t('finish')}
           disabled={!isValid || isSubmitting}
           onClick={handleSubmit(onSubmit)}
           fullWidth

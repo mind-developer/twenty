@@ -13,6 +13,8 @@ import { TextInput } from '@/ui/input/components/TextInput';
 import { sanitizeEmailList } from '@/workspace/utils/sanitizeEmailList';
 import { useSendInviteLinkMutation } from '~/generated/graphql';
 import { isDefined } from '~/utils/isDefined';
+import { t } from 'i18next';
+import { useTranslation } from 'react-i18next';
 
 const StyledContainer = styled.div`
   display: flex;
@@ -85,7 +87,7 @@ export const WorkspaceInviteTeam = () => {
     if (isDefined(result.errors)) {
       throw result.errors;
     }
-    enqueueSnackBar('Invite link sent to email addresses', {
+    enqueueSnackBar(t('inviteSentToEmailAddresses'), {
       variant: SnackBarVariant.Success,
       duration: 2000,
     });
@@ -105,6 +107,7 @@ export const WorkspaceInviteTeam = () => {
     }
   }, [isSubmitSuccessful, reset]);
 
+  const { t } = useTranslation();
   return (
     <form onSubmit={submit}>
       <StyledContainer>
@@ -131,7 +134,7 @@ export const WorkspaceInviteTeam = () => {
           Icon={IconSend}
           variant="primary"
           accent="blue"
-          title="Invite"
+          title={t('invite')}
           type="submit"
         />
       </StyledContainer>

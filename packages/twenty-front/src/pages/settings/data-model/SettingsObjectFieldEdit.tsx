@@ -36,6 +36,7 @@ import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
 import { FieldMetadataType } from '~/generated-metadata/graphql';
 import { isDefined } from '~/utils/isDefined';
+import { useTranslation } from 'react-i18next';
 
 type SettingsDataModelFieldEditFormValues = z.infer<
   ReturnType<typeof settingsFieldFormSchema>
@@ -168,6 +169,7 @@ export const SettingsObjectFieldEdit = () => {
   const shouldDisplaySaveAndCancel =
     canPersistFieldMetadataItemUpdate(activeMetadataField);
 
+  const { t } = useTranslation();
   return (
     <RecordFieldValueSelectorContextProvider>
       {/* eslint-disable-next-line react/jsx-props-no-spreading */}
@@ -177,7 +179,7 @@ export const SettingsObjectFieldEdit = () => {
             <SettingsHeaderContainer>
               <Breadcrumb
                 links={[
-                  { children: 'Objects', href: '/settings/objects' },
+                  { children: t('objects'), href: '/settings/objects' },
                   {
                     children: activeObjectMetadataItem.labelPlural,
                     href: `/settings/objects/${objectSlug}`,
@@ -196,8 +198,8 @@ export const SettingsObjectFieldEdit = () => {
             </SettingsHeaderContainer>
             <Section>
               <H2Title
-                title="Name and description"
-                description="The name and description of this field"
+                title={t('nameAndDescription')}
+                description={t('nameAndDescriptionDescription')}
               />
               <SettingsDataModelFieldAboutForm
                 disabled={!activeMetadataField.isCustom}
@@ -207,8 +209,8 @@ export const SettingsObjectFieldEdit = () => {
             </Section>
             <Section>
               <H2Title
-                title="Type and values"
-                description="The field's type and values."
+                title={t('typeAndValues')}
+                description={t('typeAndValuesDescription')}
               />
               <StyledSettingsObjectFieldTypeSelect
                 disabled
@@ -224,12 +226,12 @@ export const SettingsObjectFieldEdit = () => {
             {!isLabelIdentifier && (
               <Section>
                 <H2Title
-                  title="Danger zone"
-                  description="Deactivate this field"
+                  title={t('dangerZone')}
+                  description={t('deactivateField')}
                 />
                 <Button
                   Icon={IconArchive}
-                  title="Deactivate"
+                  title={t('deactivate')}
                   size="small"
                   onClick={handleDeactivate}
                 />

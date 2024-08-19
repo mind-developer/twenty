@@ -12,6 +12,7 @@ import { DropdownMenu } from '@/ui/layout/dropdown/components/DropdownMenu';
 import { DropdownMenuItemsContainer } from '@/ui/layout/dropdown/components/DropdownMenuItemsContainer';
 import { useDropdown } from '@/ui/layout/dropdown/hooks/useDropdown';
 import { MenuItem } from '@/ui/navigation/menu-item/components/MenuItem';
+import { useTranslation } from 'react-i18next';
 
 type SettingsObjectFieldActiveActionDropdownProps = {
   isCustomField?: boolean;
@@ -47,6 +48,7 @@ export const SettingsObjectFieldActiveActionDropdown = ({
     closeDropdown();
   };
 
+  const { t } = useTranslation();
   return (
     <Dropdown
       dropdownId={dropdownId}
@@ -61,20 +63,20 @@ export const SettingsObjectFieldActiveActionDropdown = ({
         <DropdownMenu width="160px">
           <DropdownMenuItemsContainer>
             <MenuItem
-              text={isCustomField ? 'Edit' : 'View'}
+              text={isCustomField ? t('edit') : t('view')}
               LeftIcon={isCustomField ? IconPencil : IconEye}
               onClick={handleEdit}
             />
             {!!onSetAsLabelIdentifier && (
               <MenuItem
-                text="Set as record text"
+                text={t('setAsRecordText')}
                 LeftIcon={IconTextSize}
                 onClick={handleSetAsLabelIdentifier}
               />
             )}
             {!!onDeactivate && (
               <MenuItem
-                text="Deactivate"
+                text={t('deactivate')}
                 LeftIcon={IconArchive}
                 onClick={handleDeactivate}
               />

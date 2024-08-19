@@ -5,14 +5,18 @@ import { SettingsPageContainer } from '@/settings/components/SettingsPageContain
 import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer';
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
+import { useTranslation } from 'react-i18next';
 
-export const SettingsAccountsEmails = () => (
+export const SettingsAccountsEmails = () => {
+const { t } = useTranslation();
+  
+return(
   <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
     <SettingsPageContainer>
       <Breadcrumb
         links={[
-          { children: 'Accounts', href: '/settings/accounts' },
-          { children: 'Emails' },
+          { children: t('accounts'), href: '/settings/accounts' },
+          { children: t('emails') },
         ]}
       />
       <Section>
@@ -20,4 +24,5 @@ export const SettingsAccountsEmails = () => (
       </Section>
     </SettingsPageContainer>
   </SubMenuTopBarContainer>
-);
+  );
+};

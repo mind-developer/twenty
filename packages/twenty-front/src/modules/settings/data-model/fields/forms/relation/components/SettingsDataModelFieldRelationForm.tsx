@@ -14,6 +14,7 @@ import { RelationType } from '@/settings/data-model/types/RelationType';
 import { IconPicker } from '@/ui/input/components/IconPicker';
 import { Select } from '@/ui/input/components/Select';
 import { TextInput } from '@/ui/input/components/TextInput';
+import { useTranslation } from 'react-i18next';
 
 export const settingsDataModelFieldRelationFormSchema = z.object({
   relation: z.object({
@@ -93,6 +94,7 @@ export const SettingsDataModelFieldRelationForm = ({
     watchFormValue('relation.objectMetadataId'),
   );
 
+  const { t } = useTranslation();
   return (
     <StyledContainer>
       <StyledSelectsContainer>
@@ -102,7 +104,7 @@ export const SettingsDataModelFieldRelationForm = ({
           defaultValue={initialRelationType}
           render={({ field: { onChange, value } }) => (
             <Select
-              label="Relation type"
+              label={t('relationType')}
               dropdownId="relation-type-select"
               fullWidth
               disabled={disableRelationEdition}
@@ -118,7 +120,7 @@ export const SettingsDataModelFieldRelationForm = ({
           defaultValue={initialRelationObjectMetadataItem.id}
           render={({ field: { onChange, value } }) => (
             <Select
-              label="Object destination"
+              label={t('objectDestination')}
               dropdownId="object-destination-select"
               fullWidth
               disabled={disableRelationEdition}
@@ -136,7 +138,7 @@ export const SettingsDataModelFieldRelationForm = ({
         />
       </StyledSelectsContainer>
       <StyledInputsLabel>
-        Field on {selectedObjectMetadataItem?.labelPlural}
+        {t('fieldOn')} {selectedObjectMetadataItem?.labelPlural}
       </StyledInputsLabel>
       <StyledInputsContainer>
         <Controller

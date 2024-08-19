@@ -17,6 +17,8 @@ import { WorkspaceMember } from '@/workspace-member/types/WorkspaceMember';
 import { WorkspaceInviteLink } from '@/workspace/components/WorkspaceInviteLink';
 import { WorkspaceInviteTeam } from '@/workspace/components/WorkspaceInviteTeam';
 import { WorkspaceMemberCard } from '@/workspace/components/WorkspaceMemberCard';
+import { WorkspaceMember } from '@/workspace-member/types/WorkspaceMember';
+import { useTranslation } from 'react-i18next';
 
 const StyledH1Title = styled(H1Title)`
   margin-bottom: 0;
@@ -49,22 +51,24 @@ export const SettingsWorkspaceMembers = () => {
     setIsConfirmationModalOpen(false);
   };
 
+  const { t } = useTranslation();
+
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
-        <StyledH1Title title="Members" />
+        <StyledH1Title title={t('members')} />
         <Section>
           <H2Title
-            title="Invite by email"
-            description="Send an invite email to your team"
+            title={t('membersInviteEmail')}
+            description={t('membersInviteEmailDescription')}
           />
           <WorkspaceInviteTeam />
         </Section>
         {currentWorkspace?.inviteHash && (
           <Section>
             <H2Title
-              title="Or send an invite link"
-              description="Copy and send an invite link directly"
+              title={t('membersInviteLink')}
+              description={t('membersInviteLinkDescription')}
             />
             <WorkspaceInviteLink
               inviteLink={`${window.location.origin}/invite/${currentWorkspace?.inviteHash}`}
@@ -73,8 +77,8 @@ export const SettingsWorkspaceMembers = () => {
         )}
         <Section>
           <H2Title
-            title="Members"
-            description="Manage the members of your space here"
+            title={t('members')}
+            description={t('membersDescription')}
           />
           {workspaceMembers?.map((member) => (
             <WorkspaceMemberCard
@@ -102,18 +106,17 @@ export const SettingsWorkspaceMembers = () => {
       <ConfirmationModal
         isOpen={isConfirmationModalOpen}
         setIsOpen={setIsConfirmationModalOpen}
-        title="Account Deletion"
+        title={t('deleteAccountTitle')}
         subtitle={
           <>
-            This action cannot be undone. This will permanently delete this user
-            and remove them from all their assignements.
+            {t('deleteAccountWarning')}
           </>
         }
         onConfirmClick={() =>
           workspaceMemberToDelete &&
           handleRemoveWorkspaceMember(workspaceMemberToDelete)
         }
-        deleteButtonText="Delete account"
+        deleteButtonText={t('deleteAccountButtonText')}
       />
     </SubMenuTopBarContainer>
   );

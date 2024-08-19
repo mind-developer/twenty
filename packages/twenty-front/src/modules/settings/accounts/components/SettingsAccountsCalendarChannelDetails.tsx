@@ -5,8 +5,10 @@ import { SettingsAccountsEventVisibilitySettingsCard } from '@/settings/accounts
 import { SettingsAccountsToggleSettingCard } from '@/settings/accounts/components/SettingsAccountsToggleSettingCard';
 import styled from '@emotion/styled';
 import { Section } from '@react-email/components';
+import { useTranslation } from 'react-i18next';
 import { H2Title } from 'twenty-ui';
 import { CalendarChannelVisibility } from '~/generated-metadata/graphql';
+import i18n from '~/utils/i18n/index';
 
 const StyledDetailsContainer = styled.div`
   display: flex;
@@ -46,12 +48,13 @@ export const SettingsAccountsCalendarChannelDetails = ({
     });
   };
 
+  const { t } = useTranslation();
   return (
     <StyledDetailsContainer>
       <Section>
         <H2Title
-          title="Event visibility"
-          description="Define what will be visible to other users in your workspace"
+          title={t('visibility')}
+          description={t('visibilityDescription')}
         />
         <SettingsAccountsEventVisibilitySettingsCard
           value={calendarChannel.visibility}
@@ -60,15 +63,15 @@ export const SettingsAccountsCalendarChannelDetails = ({
       </Section>
       <Section>
         <H2Title
-          title="Contact auto-creation"
-          description="Automatically create contacts for people you've participated in an event with."
+          title={t('contactAutoCreation')}
+          description={t('contactAutoCreationCalendarDescription')}
         />
         <SettingsAccountsToggleSettingCard
           parameters={[
             {
               value: !!calendarChannel.isContactAutoCreationEnabled,
-              title: 'Auto-creation',
-              description: 'Automatically create contacts for people.',
+              title: i18n.t('autoCreation'),
+              description: i18n.t('autoCreationDescription'),
               onToggle: handleContactAutoCreationToggle,
             },
           ]}

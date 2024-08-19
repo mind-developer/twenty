@@ -1,5 +1,6 @@
 import { useGetDatabaseConnectionTables } from '@/databases/hooks/useGetDatabaseConnectionTables';
 import { Status } from '@/ui/display/status/components/Status';
+import { useTranslation } from 'react-i18next';
 import { RemoteTableStatus } from '~/generated-metadata/graphql';
 import { isDefined } from '~/utils/isDefined';
 
@@ -20,8 +21,10 @@ export const SettingsIntegrationDatabaseConnectionSyncStatus = ({
     shouldFetchPendingSchemaUpdates,
   });
 
+  const { t } = useTranslation();
+
   if (isDefined(error)) {
-    return <Status color="red" text="Connection failed" />;
+    return <Status color="red" text={t('connectionFailed')} />;
   }
 
   const syncedTables = tables.filter(

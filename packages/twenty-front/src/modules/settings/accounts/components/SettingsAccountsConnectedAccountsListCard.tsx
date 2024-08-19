@@ -10,6 +10,7 @@ import { SettingsPath } from '@/types/SettingsPath';
 import { Status } from '@/ui/display/status/components/Status';
 
 import { SettingsListCard } from '../../components/SettingsListCard';
+import { useTranslation } from 'react-i18next';
 
 const StyledRowRightContainer = styled.div`
   align-items: center;
@@ -25,6 +26,7 @@ export const SettingsAccountsConnectedAccountsListCard = ({
   loading?: boolean;
 }) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   if (!accounts.length) {
     return <SettingsAccountsListEmptyStateCard />;
@@ -45,7 +47,7 @@ export const SettingsAccountsConnectedAccountsListCard = ({
         </StyledRowRightContainer>
       )}
       hasFooter
-      footerButtonLabel="Add account"
+      footerButtonLabel={t('addAccount')}
       onFooterButtonClick={() =>
         navigate(getSettingsPagePath(SettingsPath.NewAccount))
       }

@@ -14,7 +14,11 @@ import { currentWorkspaceState } from '@/auth/states/currentWorkspaceState';
 import { AnimatedEaseIn } from '@/ui/utilities/animation/components/AnimatedEaseIn';
 import { isDefined } from '~/utils/isDefined';
 
+import { useTranslation } from 'react-i18next';
+
 export const SignInUp = () => {
+  const { t } = useTranslation();
+
   const { form } = useSignInUpForm();
   const currentWorkspace = useRecoilValue(currentWorkspaceState);
 
@@ -25,11 +29,11 @@ export const SignInUp = () => {
       signInUpStep === SignInUpStep.Init ||
       signInUpStep === SignInUpStep.Email
     ) {
-      return 'Welcome to Twenty';
+      return t('welcomeMessage');
     }
     return signInUpMode === SignInUpMode.SignIn
-      ? 'Sign in to Twenty'
-      : 'Sign up to Twenty';
+      ? t('signInMessage')
+      : t('signUpMessage');
   }, [signInUpMode, signInUpStep]);
 
   if (isDefined(currentWorkspace)) {

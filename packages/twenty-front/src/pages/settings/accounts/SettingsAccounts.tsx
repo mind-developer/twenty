@@ -16,6 +16,7 @@ import { SubMenuTopBarContainer } from '@/ui/layout/page/SubMenuTopBarContainer'
 import { Section } from '@/ui/layout/section/components/Section';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
 import { useIsFeatureEnabled } from '@/workspace/hooks/useIsFeatureEnabled';
+import { useTranslation } from 'react-i18next';
 
 export const SettingsAccounts = () => {
   const currentWorkspaceMember = useRecoilValue(currentWorkspaceMemberState);
@@ -36,10 +37,12 @@ export const SettingsAccounts = () => {
 
   const isBlocklistEnabled = useIsFeatureEnabled('IS_BLOCKLIST_ENABLED');
 
+  const { t } = useTranslation();
+
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
-        <Breadcrumb links={[{ children: 'Accounts' }]} />
+        <Breadcrumb links={[{ children: t('accounts') }]} />
 
         {loading ? (
           <SettingsAccountLoader />
@@ -47,8 +50,8 @@ export const SettingsAccounts = () => {
           <>
             <Section>
               <H2Title
-                title="Connected accounts"
-                description="Manage your internet accounts."
+                title={t('accountsTitle')}
+                description={t('accountsDescription')}
               />
               <SettingsAccountsConnectedAccountsListCard
                 accounts={accounts}

@@ -16,6 +16,8 @@ import { LightButton } from '@/ui/input/button/components/LightButton';
 import { LightIconButton } from '@/ui/input/button/components/LightIconButton';
 import { isDefined } from '~/utils/isDefined';
 
+import i18n from '~/utils/i18n/index';
+
 export enum SnackBarVariant {
   Default = 'default',
   Error = 'error',
@@ -94,12 +96,13 @@ const StyledDescription = styled.div`
   width: 200px;
 `;
 
+
 const defaultTitleByVariant: Record<SnackBarVariant, string> = {
-  [SnackBarVariant.Default]: 'Alert',
-  [SnackBarVariant.Error]: 'Error',
-  [SnackBarVariant.Info]: 'Info',
-  [SnackBarVariant.Success]: 'Success',
-  [SnackBarVariant.Warning]: 'Warning',
+  [SnackBarVariant.Default]: i18n.t('alert'),
+  [SnackBarVariant.Error]: i18n.t('error'),
+  [SnackBarVariant.Info]: i18n.t('info'),
+  [SnackBarVariant.Success]: i18n.t('success'),
+  [SnackBarVariant.Warning]: i18n.t('warning'),
 };
 
 export const SnackBar = ({

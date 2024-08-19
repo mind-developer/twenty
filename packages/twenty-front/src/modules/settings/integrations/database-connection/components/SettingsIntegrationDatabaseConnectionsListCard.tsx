@@ -7,6 +7,7 @@ import { SettingsIntegrationDatabaseConnectionSyncStatus } from '@/settings/inte
 import { SettingsIntegration } from '@/settings/integrations/types/SettingsIntegration';
 import { LightIconButton } from '@/ui/input/button/components/LightIconButton';
 import { RemoteServer } from '~/generated-metadata/graphql';
+import { useTranslation } from 'react-i18next';
 
 type SettingsIntegrationDatabaseConnectionsListCardProps = {
   integration: SettingsIntegration;
@@ -37,6 +38,8 @@ export const SettingsIntegrationDatabaseConnectionsListCard = ({
 }: SettingsIntegrationDatabaseConnectionsListCardProps) => {
   const navigate = useNavigate();
 
+  const { t } = useTranslation();
+
   return (
     <SettingsListCard
       items={connections}
@@ -56,7 +59,7 @@ export const SettingsIntegrationDatabaseConnectionsListCard = ({
       onRowClick={(connection) => navigate(`./${connection.id}`)}
       getItemLabel={(connection) => connection.label}
       hasFooter
-      footerButtonLabel="Add connection"
+      footerButtonLabel={t('addConnection')}
       onFooterButtonClick={() => navigate('./new')}
     />
   );

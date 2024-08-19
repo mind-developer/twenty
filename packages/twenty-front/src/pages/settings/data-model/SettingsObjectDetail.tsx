@@ -32,6 +32,7 @@ import { TableHeader } from '@/ui/layout/table/components/TableHeader';
 import { TableSection } from '@/ui/layout/table/components/TableSection';
 import { Breadcrumb } from '@/ui/navigation/bread-crumb/components/Breadcrumb';
 import { UndecoratedLink } from '@/ui/navigation/link/components/UndecoratedLink';
+import { useTranslation } from 'react-i18next';
 
 const StyledDiv = styled.div`
   display: flex;
@@ -93,17 +94,18 @@ export const SettingsObjectDetail = () => {
 
   const shouldDisplayAddFieldButton = !activeObjectMetadataItem.isRemote;
 
+  const { t } = useTranslation();
   return (
     <SubMenuTopBarContainer Icon={IconSettings} title="Settings">
       <SettingsPageContainer>
         <Breadcrumb
           links={[
-            { children: 'Objects', href: '/settings/objects' },
+            { children: t('objects'), href: '/settings/objects' },
             { children: activeObjectMetadataItem.labelPlural },
           ]}
         />
         <Section>
-          <H2Title title="About" description="Manage your object" />
+          <H2Title title={t('about')} description={t('manageYourObject')} />
           <SettingsObjectSummaryCard
             iconKey={activeObjectMetadataItem.icon ?? undefined}
             name={activeObjectMetadataItem.labelPlural || ''}
@@ -114,22 +116,24 @@ export const SettingsObjectDetail = () => {
         </Section>
         <Section>
           <H2Title
-            title="Fields"
-            description={`Customise the fields available in the ${activeObjectMetadataItem.labelSingular} views and their display order in the ${activeObjectMetadataItem.labelSingular} detail view and menus.`}
+            title={t('fields')}
+            description={t('fieldsDescription', {
+              objectMetadata: activeObjectMetadataItem.labelSingular
+            })}
           />
           <Table>
             <StyledObjectFieldTableRow>
-              <TableHeader>Name</TableHeader>
+              <TableHeader>{t('name')}</TableHeader>
               <TableHeader>
                 {activeObjectMetadataItem.isCustom
-                  ? 'Identifier'
-                  : 'Field type'}
+                  ? t('identifier')
+                  : t('fieldType')}
               </TableHeader>
-              <TableHeader>Data type</TableHeader>
+              <TableHeader>{t('dataType')}</TableHeader>
               <TableHeader></TableHeader>
             </StyledObjectFieldTableRow>
             {!!activeMetadataFields.length && (
-              <TableSection title="Active">
+              <TableSection title={t('active')}>
                 {activeMetadataFields.map((activeMetadataField) => {
                   const isLabelIdentifier = isLabelIdentifierField({
                     fieldMetadataItem: activeMetadataField,
@@ -185,7 +189,7 @@ export const SettingsObjectDetail = () => {
               </TableSection>
             )}
             {!!deactivatedMetadataFields.length && (
-              <TableSection isInitiallyExpanded={false} title="Inactive">
+              <TableSection isInitiallyExpanded={false} title={t('inactive')}>
                 {deactivatedMetadataFields.map((deactivatedMetadataField) => (
                   <SettingsObjectFieldItemTableRow
                     key={deactivatedMetadataField.id}
@@ -223,7 +227,7 @@ export const SettingsObjectDetail = () => {
               >
                 <Button
                   Icon={IconPlus}
-                  title="Add Field"
+                  title={t('addField')}
                   size="small"
                   variant="secondary"
                 />
