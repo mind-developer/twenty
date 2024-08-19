@@ -2,6 +2,7 @@ import styled from '@emotion/styled';
 import { H1Title, H2Title, IconSettings } from 'twenty-ui';
 
 import { SettingsPageContainer } from '@/settings/components/SettingsPageContainer';
+import { ChangeLanguage } from '@/settings/profile/components/ChangeLanguage';
 import { ChangePassword } from '@/settings/profile/components/ChangePassword';
 import { DeleteAccount } from '@/settings/profile/components/DeleteAccount';
 import { EmailField } from '@/settings/profile/components/EmailField';
@@ -32,6 +33,13 @@ export const SettingsProfile = () => (
           description="The email associated to your account"
         />
         <EmailField />
+      </Section>
+      <Section>
+        <H2Title
+          title="Language"
+          description="Change the language used in the user interface"
+        />
+        <ChangeLanguage />
       </Section>
       <Section>
         <ChangePassword />

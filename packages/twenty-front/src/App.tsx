@@ -86,6 +86,11 @@ import { SettingsProfile } from '~/pages/settings/SettingsProfile';
 import { SettingsWorkspace } from '~/pages/settings/SettingsWorkspace';
 import { SettingsWorkspaceMembers } from '~/pages/settings/SettingsWorkspaceMembers';
 import { getPageTitleFromPath } from '~/utils/title-utils';
+import { SettingsRoles } from '~/pages/settings/roles/SettingsRoles';
+import { SettingsNewRole } from '~/pages/settings/roles/SettingsNewRole';
+import { SettingsRoleEdit } from '~/pages/settings/roles/SettingsRoleEdit';
+import { SettingsRoleView } from '~/pages/settings/roles/SettingsRoleView';
+import { SettingsRolesOverview } from '~/pages/settings/roles/SettingsRolesOverview';
 
 const ProvidersThatNeedRouterContext = () => {
   const { pathname } = useLocation();
@@ -203,6 +208,26 @@ const createRouter = (
                 <Route
                   path={SettingsPath.WorkspaceMembersPage}
                   element={<SettingsWorkspaceMembers />}
+                />
+                <Route
+                  path={SettingsPath.MembersRoles}
+                  element={<SettingsRoles />}
+                />
+                <Route
+                  path={SettingsPath.NewRole}
+                  element={<SettingsNewRole />}
+                />
+                <Route
+                  path={SettingsPath.EditRole}
+                  element={<SettingsRoleEdit />}
+                />
+                <Route
+                  path={SettingsPath.ViewRole}
+                  element={<SettingsRoleView />}
+                />
+                <Route
+                  path={SettingsPath.RoleOverview}
+                  element={<SettingsRolesOverview />}
                 />
                 <Route
                   path={SettingsPath.Workspace}
